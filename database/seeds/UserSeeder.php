@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
-class DatabaseSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class, 
-            QuestionTableSeeder::class
-        ]);
+        factory(App\User::class, 10)->create();
     }
 }
