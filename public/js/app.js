@@ -6420,7 +6420,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".question[data-v-0fecee51] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.question__answer[data-v-0fecee51] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.question__answer textarea[data-v-0fecee51] {\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}", ""]);
+exports.push([module.i, ".question[data-v-0fecee51] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.question__answer[data-v-0fecee51] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.question__answer textarea[data-v-0fecee51] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}", ""]);
 
 // exports
 

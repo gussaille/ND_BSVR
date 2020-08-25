@@ -61,6 +61,8 @@ export default {
         padding: 10px;
 
         textarea {
+            box-sizing: border-box;
+            padding: 5px;
             max-height: 100px;
             width:80%;
             max-width: 500px; 
