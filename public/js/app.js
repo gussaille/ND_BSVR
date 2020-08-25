@@ -1933,8 +1933,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Question',
   components: {},
@@ -38280,31 +38278,33 @@ var render = function() {
             })
           ])
         : _vm.question.type === "select"
-        ? _c("div", [_vm._m(0)])
+        ? _c("div", [
+            _c(
+              "select",
+              { attrs: { name: "selection", id: "selection" } },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v(" Veuillez choisir une réponse ")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.question.options, function(item) {
+                  return _c(
+                    "option",
+                    { key: item, domProps: { value: item } },
+                    [_vm._v(_vm._s(item))]
+                  )
+                })
+              ],
+              2
+            )
+          ])
         : _c("div", [
             _c("input", { attrs: { type: "number", min: "1", max: "5" } })
           ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("select", { attrs: { name: "selection", id: "selection" } }, [
-      _c("option", { attrs: { value: "" } }, [
-        _vm._v(" Veuillez choisir une réponse ")
-      ]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "" } }, [_vm._v("Dog")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "" } }, [_vm._v("Cat")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "" } }, [_vm._v("Hamster")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -13,9 +13,7 @@ d<template>
 
                 <select name="selection" id="selection">
                     <option value=""> Veuillez choisir une réponse </option>
-                    <option value="">Dog</option>
-                    <option value="">Cat</option>
-                    <option value="">Hamster</option>
+                    <option v-for="item in question.options" :key="item" :value="item">{{item}}</option>
                 </select>
             </div>
             <div v-else>
