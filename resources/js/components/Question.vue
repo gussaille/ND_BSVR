@@ -10,15 +10,16 @@ d<template>
             </div>
 
             <div v-else-if="question.type === 'select'">
-
                 <select name="selection" id="selection">
                     <option value=""> Veuillez choisir une réponse </option>
                     <option v-for="item in question.options" :key="item" :value="item">{{item}}</option>
                 </select>
             </div>
+
             <div v-else>
                 <input type="number" min="1" max="5">
             </div>
+            
         </div>
     </div>
 </template>
