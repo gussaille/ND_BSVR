@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <Question-survey/>
+   
+    <question-survey :question='{{$questions}}'></question-survey>
 
 @endsection
