@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    public function answers()
+    public function answer()
     {
-        return $this->belongsToMany(Answer::class);
+        return $this->OneToMany(Answer::class);
     }
 }

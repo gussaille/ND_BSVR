@@ -1,10 +1,13 @@
 <template>
     <div class="survey">
-        <h1>BigScreen</h1>
-		<p>Merci de répondre à toutes les questions et de valider le formulaire en bas de page.</p>
-
-		<Question v-for="(question, index) in questions" :key="index" :question="question"/>
-
+		<div class="survey__presentation">
+			<h1>BigScreen</h1>
+			<p>Merci de répondre à toutes les questions et de valider le formulaire en bas de page.</p>
+		</div>
+		
+		<form>
+			<Question v-for="(question, index) in questions" :key="index" :question="question"/>
+		</form>
     </div>
 </template>
 
@@ -30,4 +33,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 
+	.survey{
+		width: 100%;
+		margin: 0 auto;
+		
+		&__presentation {
+			margin: 0 auto;
+			width: 90%;
+			max-width: 800px;
+		}
+	}
 </style>

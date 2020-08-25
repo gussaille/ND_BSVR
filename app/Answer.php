@@ -8,6 +8,10 @@ class Answer extends Model
 {
     public function question()
     {
-        return $this->belongsTo(Answer::class);
+        return $this->ManyToMany(Question::class);
+    }
+    
+    public function user(){
+        return $this->ManyToMany(User::class);
     }
 }
