@@ -1,7 +1,20 @@
-<template>
+d<template>
     <div class="question">
         <h1>Question {{question.id}}/20</h1>
         <h2>{{question.statement}}</h2>
+
+        <div v-if="question.type === 'text'">
+            <textarea placeholder="Veuillez saisir votre réponse"></textarea>
+        </div>
+        <div v-else-if="question.type === 'select'">
+
+            <select name="selection" id="selection">
+                <option value="">--Veuillez choisir une réponse --</option>
+                <option value="">Dog</option>
+                <option value="">Cat</option>
+                <option value="">Hamster</option>
+            </select>
+        </div>
     </div>
 </template>
 
