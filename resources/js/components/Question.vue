@@ -1,18 +1,19 @@
 <template>
     <div class="question">
-        <h1>Sondage</h1>
+        <h1>Question {{question.id}}/20</h1>
+        <h2>{{question.statement}}</h2>
     </div>
 </template>
 
 <script>
 
 export default {
-	name: 'question-survey',
+    name: 'Question',
     components:{},
+    props: ['question'],
 	data() {
 		return {
-		   
-		}
+        }
 	},
 	mounted() {
 	 
@@ -24,4 +25,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 
+.question {
+    background-color: lightgrey;
+    margin: 10px auto;
+}
 </style>

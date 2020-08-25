@@ -10,10 +10,12 @@ window.Vue = require('vue');
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import QuestionSurvey from './components/QuestionSurvey.vue';
+import Survey from './components/Survey.vue';
 
 Vue.use(VueRouter)
-Vue.component('question-survey', require('./components/QuestionSurvey.vue').default);
+Vue.component('survey', require('./components/Survey.vue').default);
+Vue.component('question', require('./components/Question.vue').default);
+
 
 
 const router = new VueRouter({
@@ -23,8 +25,8 @@ const router = new VueRouter({
 
 const routes = [{
     path: '*',
-    component: QuestionSurvey,
-    name: 'question-survey'
+    component: Survey,
+    name: 'survey'
 }];
 
 const app = new Vue({

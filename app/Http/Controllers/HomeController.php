@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
        
         $questions = Question::all();
-        return view("front.home", compact('questions'));
+        return view("front.home", ['questions'=> $questions]);
 
     }
 }
