@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'url', 'user_type'
+        'name', 'email', 'password', 'url', 'role'
     ];
 
     /**
@@ -37,9 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function answer()
+    public function usersAnswer()
     {
-            return $this->ManyToMany(Answer::class);
-    }
-    
+        return $this->BelongsTo(UsersAnswer::class);
+    }  
 }

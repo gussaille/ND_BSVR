@@ -13,6 +13,6 @@ class Question extends Model
 
     public function answer()
     {
-        return $this->OneToMany(Answer::class);
+        return $this->hasMany(Answer::class);
     }
 }

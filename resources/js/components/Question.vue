@@ -6,18 +6,19 @@ d<template>
         <div class="question__answer">
 
             <div v-if="question.type === 'text'">
-                <textarea placeholder="Veuillez saisir votre réponse" maxlength="255"></textarea>
+                <textarea placeholder="Veuillez saisir votre réponse" v-model="fields[question.id]" maxlength="255"></textarea>
+                <div v-if="errors && errors.name" class="text-danger">{{ errors.name[0] }}</div>
             </div>
 
             <div v-else-if="question.type === 'select'">
-                <select name="selection" id="selection">
+                <select name="selection" id="selection" v-model="fields[question.id]">
                     <option value=""> Veuillez choisir une réponse </option>
-                    <option v-for="item in question.options" :key="item" :value="item">{{item}}</option>
+                    <option v-for="item in question.options" :key="item" :value="item" >{{item}}</option>
                 </select>
             </div>
 
             <div v-else>
-                <input type="number" min="1" max="5">
+                <input type="number" min="1" max="5" v-model="fields[question.id]">
             </div>
             
         </div>
@@ -32,6 +33,8 @@ export default {
     props: ['question'],
 	data() {
 		return {
+            fields: {},
+			errors: {},
         }
 	},
 	mounted() {
