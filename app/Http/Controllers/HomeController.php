@@ -30,4 +30,21 @@ class HomeController extends Controller
         return view('login');
 
     }
+
+    public function charts()
+    {
+        return view('back.index');
+    }
+
+    public function questions()
+    {
+        $questions = Question::all();
+
+        return view("back.survey", ['questions'=> $questions]);
+    }
+
+    public function answers()
+    {
+       return view('back.answers');
+    }
 }

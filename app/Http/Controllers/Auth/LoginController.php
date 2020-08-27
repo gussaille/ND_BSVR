@@ -58,10 +58,10 @@ class LoginController extends Controller
     }
 
 
-    public function toDashboard()
-    {
-        return view('back.index');
-    }
+    // public function toDashboard()
+    // {
+    //     return view('back.index');
+    // }
 
 
     // public function dashboard()
