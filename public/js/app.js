@@ -2000,6 +2000,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import Question from './Question';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Survey',
@@ -2008,7 +2018,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       questions: questions,
       answers: [],
-      errors: {}
+      errors: {},
+      userAnswer: [],
+      isSubmit: false,
+      answered: []
     };
   },
   mounted: function mounted() {},
@@ -2017,8 +2030,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.errors = {};
-      axios.post('/submit', this.answers).then(function (response) {
-        console.log(response);
+      this.userAnswer.forEach(function (element, index) {
+        return _this.answers.push({
+          'question_id': index + 1,
+          'response': element
+        });
+      });
+      axios.post('/submit', {
+        'answered': this.answered
+      }).then(function (res) {
+        _this.isSubmit = true;
+        alert('Formulaire envoyé');
       })["catch"](function (error) {
         if (error.response.status === 422) {
           _this.errors = error.response.data.errors || {};
@@ -6481,7 +6503,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}", ""]);
+exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  color: #2bab2b;\n  font-size: 26px;\n}", ""]);
 
 // exports
 
@@ -38440,154 +38462,169 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "survey" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.submit($event)
-          }
-        }
-      },
-      [
-        _vm._l(_vm.questions, function(question, index) {
-          return _c("div", { key: index, staticClass: "question" }, [
-            _c("h1", [_vm._v("Question " + _vm._s(question.id) + "/20")]),
-            _vm._v(" "),
-            _c("h2", [_vm._v(_vm._s(question.statement))]),
-            _vm._v(" "),
-            _c("div", { staticClass: "question__answer" }, [
-              question.type === "text"
-                ? _c("div", [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.answers[index],
-                          expression: "answers[index]"
-                        }
-                      ],
-                      attrs: {
-                        placeholder: "Veuillez saisir votre réponse",
-                        maxlength: "255"
-                      },
-                      domProps: { value: _vm.answers[index] },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.answers, index, $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                : question.type === "select"
-                ? _c("div", [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.answers[index],
-                            expression: "answers[index]"
-                          }
-                        ],
-                        attrs: { name: "selection", id: "selection" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.answers,
-                              index,
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "" } }, [
-                          _vm._v(" Veuillez choisir une réponse ")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(question.options, function(item) {
-                          return _c(
-                            "option",
-                            { key: item, domProps: { value: item } },
-                            [_vm._v(_vm._s(item))]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ])
-                : _c("div", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.answers[index],
-                          expression: "answers[index]"
-                        }
-                      ],
-                      attrs: { type: "number", min: "1", max: "5" },
-                      domProps: { value: _vm.answers[index] },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.answers, index, $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-            ])
+    !_vm.isSubmit
+      ? _c("div", { staticClass: "survey__presentation" }, [
+          _c("h1", [_vm._v("BigScreen")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Merci de répondre à toutes les questions et de valider le formulaire en bas de page."
+            )
           ])
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Finaliser")]
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.isSubmit
+      ? _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
+              }
+            }
+          },
+          [
+            _vm._l(_vm.questions, function(question, index) {
+              return _c("div", { key: index, staticClass: "question" }, [
+                _c("h1", [_vm._v("Question " + _vm._s(question.id) + "/20")]),
+                _vm._v(" "),
+                _c("h2", [_vm._v(_vm._s(question.statement))]),
+                _vm._v(" "),
+                _c("div", { staticClass: "question__answer" }, [
+                  question.type === "text"
+                    ? _c("div", [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.userAnswer[index],
+                              expression: "userAnswer[index]"
+                            }
+                          ],
+                          attrs: {
+                            placeholder: "Veuillez saisir votre réponse",
+                            maxlength: "255"
+                          },
+                          domProps: { value: _vm.userAnswer[index] },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.userAnswer,
+                                index,
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    : question.type === "select"
+                    ? _c("div", [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.userAnswer[index],
+                                expression: "userAnswer[index]"
+                              }
+                            ],
+                            attrs: { name: "selection", id: "selection" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.userAnswer,
+                                  index,
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v(" Veuillez choisir une réponse ")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(question.options, function(item) {
+                              return _c(
+                                "option",
+                                { key: item, domProps: { value: item } },
+                                [_vm._v(_vm._s(item))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    : _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.userAnswer[index],
+                              expression: "userAnswer[index]"
+                            }
+                          ],
+                          attrs: { type: "number", min: "1", max: "5" },
+                          domProps: { value: _vm.userAnswer[index] },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.userAnswer,
+                                index,
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                ])
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Finaliser")]
+            )
+          ],
+          2
         )
-      ],
-      2
-    )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isSubmit
+      ? _c("div", { staticClass: "survey__confirmation" }, [
+          _c("p", [
+            _vm._v(
+              "Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à\n\t\t\t\tvotre investissement, nous vous préparons une application toujours plus\n\t\t\t\tfacile à utiliser, seul ou en famille.\n\t\t\t\tSi vous désirez consulter vos réponse ultérieurement, vous pouvez consultez\n\t\t\t\tcette adresse: http://xxxxxxxx\n\n\t\t\t\t"
+            )
+          ])
+        ])
+      : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "survey__presentation" }, [
-      _c("h1", [_vm._v("BigScreen")]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "Merci de répondre à toutes les questions et de valider le formulaire en bas de page."
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

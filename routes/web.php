@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/administration', 'Auth\LoginController@index');
+Route::get('/administration/dashboard', 'Auth\LoginController@toDashboard');
+
+Route::post('post-login', 'Auth\LoginController@postLogin'); 
+// Route::get('/administration/dashboard', 'Auth\LoginController@dashboard'); 
+Route::get('logout', 'Auth\LoginController@logout');
+
 Route::get('/home', 'FrontController@index');
 Route::post('/submit', 'FrontController@store');
 

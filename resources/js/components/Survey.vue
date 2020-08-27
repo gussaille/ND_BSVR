@@ -1,11 +1,11 @@
 <template>
     <div class="survey">
-		<div class="survey__presentation">
+		<div class="survey__presentation" v-if="!isSubmit">
 			<h1>BigScreen</h1>
 			<p>Merci de répondre à toutes les questions et de valider le formulaire en bas de page.</p>
 		</div>
 		
-		<form @submit.prevent="submit">
+		<form @submit.prevent="submit" v-if="!isSubmit">
 			<!-- <Question v-for="(question, index) in questions" :key="index" :question="question"/> -->
 
 			<div v-for="(question, index) in questions" class="question" :key="index">
@@ -15,18 +15,18 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'text'">
-						<textarea placeholder="Veuillez saisir votre réponse" v-model="answers[index]" maxlength="255"></textarea>
+						<textarea placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
 					</div>
 
 					<div v-else-if="question.type === 'select'">
-						<select name="selection" id="selection" v-model="answers[index]">
+						<select name="selection" id="selection" v-model="userAnswer[index]">
 							<option value=""> Veuillez choisir une réponse </option>
 							<option v-for="item in question.options" :key="item" :value="item" >{{item}}</option>
 						</select>
 					</div>
 
 					<div v-else>
-						<input type="number" min="1" max="5" v-model="answers[index]">
+						<input type="number" min="1" max="5" v-model="userAnswer[index]">
 					</div>
 					
 				</div>
@@ -35,6 +35,16 @@
 			<button type="submit" class="btn btn-primary">Finaliser</button>
 
 		</form>
+		<div class="survey__confirmation" v-if="isSubmit">
+			<p>Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+				votre investissement, nous vous préparons une application toujours plus
+				facile à utiliser, seul ou en famille.
+				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+				cette adresse: http://xxxxxxxx
+
+				<!-- url dynamique selon l'user --> 
+			</p>
+		</div>
     </div>
 </template>
 
@@ -47,9 +57,13 @@ export default {
 	// components:{Question},
 	data() {
 		return {
+			
 			questions: questions,
 			answers: [],
 			errors: {},
+			userAnswer: [],
+			isSubmit: false,
+			answered: []
 		}
 	},
 	mounted() {
@@ -58,15 +72,20 @@ export default {
 	methods: {
     	submit() {
 			this.errors = {};
-			axios.post('/submit', this.answers).then( response => {
-				console.log(response);
-				
+			this.userAnswer.forEach((element, index) => 
+				this.answers.push({'question_id': index+1, 'response': element})
+			);
+
+			axios.post('/submit', {'answered' : this.answered}).then( res => {
+				this.isSubmit = true;
+				alert('Formulaire envoyé');
+
 			}).catch(error => {
 				if (error.response.status === 422) {
-					this.errors = error.response.data.errors || {};
+				this.errors = error.response.data.errors || {};
 				}
 			});
-    	},
+		},
     }
 }
 </script>
@@ -110,6 +129,10 @@ export default {
 					max-width: 500px; 
 				}
 			}
+		}
+		&__confirmation {
+			color: rgb(43, 171, 43);
+			font-size: 26px;
 		}
 	}
 </style>

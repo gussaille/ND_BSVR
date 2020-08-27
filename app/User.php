@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function usersAnswer()
-    {
-        return $this->BelongsTo(UsersAnswer::class);
-    }  
+    // public function Answer()
+    // {
+    //     // return $this->BelongsTo(Answer::class);
+    // }  
 }

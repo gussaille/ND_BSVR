@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    public function question()
-    {
-        return $this->ManyToMany(Question::class);
+    protected $fillable = [
+        'response', 'question_id'
+    ];
+
+    public function question(){
+
+        return $this->belongsTo(Question::class);
     }
-    
-    public function user(){
-        return $this->ManyToMany(User::class);
+    public function surveys(){
+
+        return $this->belongsToMany(Survey::class);
     }
 }

@@ -3,25 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\QuestionStoreRequest;
 use App\Question;
-use App\UsersAnswer;
+use App\Answer;
+use App\Survey;
+use App\User;
 
 class FrontController extends Controller
 {
     public function index()
     {
         $questions = Question::all();
+
         return view("front.home", ['questions'=> $questions]);
+
     }
 
-    public function store(Request $request) 
+    public function store(QuestionStoreRequest $request) 
     {
-        
-        $request->validate([
-            'response' => 'string',
-        ]);
 
-        $answers = UsersAnswer::create($request->all());
+        // var_dump($request->all());
+        // $answers = $request->all();
+        
+        // $answers = Answer::create($request->all());
+
+        // foreach($answers as $userAnswer){
+        //     $answer = Answer::create([
+        //         'response' => $answers['response'],
+        //         'question_id' => $answers['question_id']
+        //     ]);
+        //     // dd($answer);
+        // }
+
+        dd($request->all());
+        $answers = Answer::create($request->all());
 
         // return response()->json(null, 200);
     }

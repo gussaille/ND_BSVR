@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersAnswersTable extends Migration
+class CreateSurveysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateUsersAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_answers', function (Blueprint $table) {
+        Schema::create('surveys', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            // $table->foreignId('user_id')->constrained();
-            // $table->foreignId('answer_id')->constrained();
-            $table->text('response')->nullable();	
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('answer_id')->constrained();
         });
     }
 
@@ -29,6 +28,6 @@ class CreateUsersAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_answers');
+        Schema::dropIfExists('surveys');
     }
 }

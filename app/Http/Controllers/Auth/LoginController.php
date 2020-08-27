@@ -37,4 +37,46 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function index()
+    {
+        return view('auth.login');
+    }  
+     
+    public function postLogin(Request $request)
+    {
+        request()->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+ 
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard');
+        }
+        return Redirect::to("auth.login")->withSuccess('Veuillez saisir un identifiant et un mot de passe correct');
+    }
+
+
+    public function toDashboard()
+    {
+        return view('back.index');
+    }
+
+
+    // public function dashboard()
+    // {
+ 
+    //   if(Auth::check()){
+    //     return view('dashboard');
+    //   }
+    //    return Redirect::to("auth.login")->withSuccess("Vous n'avez pas accès à cette page.");
+    // }
+
+    public function logout() 
+    {
+        Session::flush();
+        Auth::logout();
+        return Redirect('authlogin');
+    }    
 }
