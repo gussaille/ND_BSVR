@@ -33,24 +33,26 @@
     var firstChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: <?php echo json_encode($Months); ?>,
+      labels: <?php echo json_encode($Headset); ?>,
       // labels: month,
       datasets: [
         {
           label: 'this year',
-          backgroundColor: '#26B99A',
+          backgroundColor: [
+            "lightblue",
+            "yellow",
+            "red",
+            "orange",
+          ],
           borderWidth: 1,
           data: <?php echo json_encode($Data); ?>
         }
       ]
     },
     options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
+        title: {
+            display: true,
+            text: "Les marques de casques VR les plus utilisées"
         }
       }
     });
@@ -59,14 +61,25 @@
     var secondChart = new Chart(ctx2, {
       type: 'pie',
       data: {
-        labels: ["Iowa", "Iowa State"],
+        labels: ["SteamVR", "Occulus store", "Viveport", "Playstation VR", "GooglePlay", "Windows store"],
         datasets: [{
           backgroundColor: [
             "#CC0000",
-            "#F1BE48",
+            "green",
+            "pink",
+            "orange",
+            "purple",
+            "lemon"
+
           ],
-          data: [2000, 9000]
+          data: [17, 20, 38, 2, 26, 12]
         }]
+      },
+      options: {
+        title: {
+            display: true,
+            text: "Les magasins où l'on achète du contenu VR"
+        }
       }
     });
 
@@ -74,22 +87,30 @@
     var thirdChart = new Chart(ctx3, {
       type: 'pie',
       data: {
-        labels: ["Iowa", "Iowa State"],
+        labels: ["regarder des émissions TV en direct", "regarder des films", "jouer en solo", "jouer en team"],
         datasets: [{
           backgroundColor: [
             "yellow",
+            "red",
+            "lightgreen",
             "black",
           ],
-          data: [2000, 9000]
+          data: [53, 12, 37, 2]
         }]
-      }
+      },
+      options: {
+        title: {
+            display: true,
+            text: 'Les pratiques sur BigScreen'
+        }
+    }
     });
 
     var ctx4 = document.querySelector("#canvas4").getContext('2d');
     var fourthChart = new Chart(ctx4, {
       type: 'radar',
       data: {
-        labels: ["Iowa", "Pensylvanie", "Wyoming", "Kentucky", "Californie"],
+        labels: ["Image", "Confort", "Réseau", "Graphisme", "Audio"],
         datasets: [{
           backgroundColor: [
             "red",
@@ -98,9 +119,15 @@
             'black',
             'purple'
           ],
-          data: [2000, 9000, 300, 1300, 6300]
+          data: [2, 3, 4, 5, 5]
         }]
       },
+      options: {
+        title: {
+            display: true,
+            text: 'Notes des clients'
+        }
+      }
     });
 
 </script>

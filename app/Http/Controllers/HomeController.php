@@ -44,9 +44,9 @@ class HomeController extends Controller
     }
 
     public function charts(){
-        $month = array('Jan', 'Feb', 'Mar', 'Apr', 'May');
-        $data  = array(1, 2, 3, 4, 5);
-        return view('back.index',['Months' => $month, 'Data' => $data]);
+        $headset = array('Occulus Rift/s', 'HTC Vive', 'Windows Mixed Reality', 'PSVR');
+        $data  = array(15, 10, 3, 43);
+        return view('back.index',['Headset' => $headset, 'Data' => $data]);
     }
       
 }

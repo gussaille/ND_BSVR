@@ -63,12 +63,32 @@
         
             canvas {
             margin: 10px;
-            max-width: 400px;
+            max-width: 500px;
             border-radius: 6px;
             box-shadow: 3px 2px 15px lightgrey;
             width: 45%;
             height: 300px;
             padding: 20px !important;
+            opacity: 0;
+            animation-name: fadeIn;
+            animation-duration: 1.4s;
+            animation-fill-mode: forwards;
+            -webkit-animation-name: fadeIn;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-fill-mode: forwards;
+            
+            &#canvas1{
+                animation-delay: 0.5s;
+            }
+            &#canvas2{
+                animation-delay: 1s;
+            } 
+            &#canvas3{
+                animation-delay: 1.5s;
+            } 
+            &#canvas4{
+                animation-delay: 2s;
+            }
         }
     }
 

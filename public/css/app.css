@@ -230,12 +230,40 @@ q:after {
 
 .information__chart canvas {
   margin: 10px;
-  max-width: 400px;
+  max-width: 500px;
   border-radius: 6px;
   box-shadow: 3px 2px 15px lightgrey;
   width: 45%;
   height: 300px;
   padding: 20px !important;
+  opacity: 0;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.4s;
+          animation-duration: 1.4s;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.information__chart canvas#canvas1 {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.information__chart canvas#canvas2 {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.information__chart canvas#canvas3 {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+
+.information__chart canvas#canvas4 {
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
 }
 
 .information .table {
