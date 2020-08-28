@@ -3,19 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Répondez au questionnaire BigScreen pour nous aider à améliorer notre application.">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>BigScreen Sondage</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preload" href="/img/bigScreen_logo.png" as="image">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+</head> 
+
 <body>
     <div id="app">
 
@@ -24,6 +27,8 @@
         </main>
 
     </div>
+
     @yield('js')
+
 </body>
 </html>

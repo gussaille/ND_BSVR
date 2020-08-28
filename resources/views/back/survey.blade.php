@@ -6,7 +6,9 @@
   
   @include('back.panel')
 
-  <div class="information">
+  <div class="information information--survey">
+
+    <h1>Questionnaire</h1>
 
     @if($questions)
       <table class="table table-striped">
