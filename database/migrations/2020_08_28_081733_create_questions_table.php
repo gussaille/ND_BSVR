@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->text('statement');	
-            $table->enum('type', ['select', 'text', 'choice']);
+            $table->enum('type', ['text', 'select', 'choice']);
             $table->string('options')->nullable();
         });
     }

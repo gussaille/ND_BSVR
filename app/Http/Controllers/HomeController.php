@@ -31,11 +31,6 @@ class HomeController extends Controller
 
     }
 
-    public function charts()
-    {
-        return view('back.index');
-    }
-
     public function questions()
     {
         $questions = Question::all();
@@ -47,4 +42,11 @@ class HomeController extends Controller
     {
        return view('back.answers');
     }
+
+    public function charts(){
+        $month = array('Jan', 'Feb', 'Mar', 'Apr', 'May');
+        $data  = array(1, 2, 3, 4, 5);
+        return view('back.index',['Months' => $month, 'Data' => $data]);
+    }
+      
 }
