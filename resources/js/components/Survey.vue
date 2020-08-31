@@ -6,7 +6,6 @@
 		</div>
 		
 		<form @submit.prevent="submit" v-if="!isSubmit">
-			<!-- <Question v-for="(question, index) in questions" :key="index" :question="question"/> -->
 
 			<div v-for="(question, index) in questions" class="question" :key="index">
 				<h1>Question {{question.id}}/20</h1>
@@ -14,11 +13,11 @@
 
 				<div class="question__answer">
 
-					<div v-if="question.type === 'text'">
+					<div v-if="question.type === 'B'">
 						<textarea placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
 					</div>
 
-					<div v-else-if="question.type === 'select'">
+					<div v-else-if="question.type === 'A'">
 						<select name="selection" id="selection" v-model="userAnswer[index]">
 							<option value=""> Veuillez choisir une réponse </option>
 							<option v-for="item in question.options" :key="item" :value="item" >{{item}}</option>
@@ -50,11 +49,8 @@
 
 <script>
 
-// import Question from './Question';
-
 export default {
 	name: 'Survey',
-	// components:{Question},
 	data() {
 		return {
 			
@@ -77,11 +73,10 @@ export default {
 
 			axios.post('/submit', {'answers' : this.answers}).then( res => {
 				this.isSubmit = true;
-				alert('Formulaire envoyé');
-
-			}).catch(error => {
+				console.log(this.answers);
+			}).catch( error => {
 				if (error.response.status === 422) {
-				this.errors = error.response.data.errors || {};
+					this.errors = error.response.data.errors || {};
 				}
 			});
 		},
@@ -130,7 +125,6 @@ export default {
 			}
 		}
 		&__confirmation {
-			color: rgb(43, 171, 43);
 			font-size: 26px;
 		}
 	}

@@ -28,7 +28,7 @@ Route::get('/administration/answers', 'HomeController@answers')->name('show_answ
 // // Route::get('/administration/dashboard', 'Auth\LoginController@dashboard'); 
 // Route::get('logout', 'Auth\LoginController@logout');
 
-Route::get('/home', 'FrontController@index');
+Route::get('/', 'FrontController@index');
 Route::post('/submit', 'FrontController@store');
 
 

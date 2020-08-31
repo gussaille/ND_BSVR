@@ -15,122 +15,122 @@ class QuestionTableSeeder extends Seeder
 
         $questions = [
             [
-                'statement' => 'Votre adresse mail ?', 
-                'type' => 'text',
+                'label' => 'Votre adresse mail ?', 
+                'type' => 'B',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Votre âge ?',
-                'type' => 'text',
+                'label' => 'Votre âge ?',
+                'type' => 'B',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Votre sexe ?', 
-                'type' => 'select', 
+                'label' => 'Votre sexe ?', 
+                'type' => 'A', 
                 'options' => json_encode(['Homme', 'Femme', 'Préfère ne pas répondre'])
             ],
 
             [
-                'statement' => 'Nombre de personne dans votre foyer (adultes et enfants) ?', 
-                'type' => 'choice',
+                'label' => 'Nombre de personne dans votre foyer (adultes et enfants) ?', 
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Votre profession ?', 
-                'type' => 'text',
+                'label' => 'Votre profession ?', 
+                'type' => 'B',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Quelle marque de casque VR utilisez-vous ?', 
-                'type' => 'select', 
+                'label' => 'Quelle marque de casque VR utilisez-vous ?', 
+                'type' => 'A', 
                 'options' => json_encode(['Occulus Rift/s', 'HTC Vive', 'Windows Mixed Reality', 'PSVR'])
             ],
 
             [
-                'statement' => "Sur quel magasin d'application achetez-vous des contenus VR ?", 
-                'type' => 'select', 
+                'label' => "Sur quel magasin d'application achetez-vous des contenus VR ?", 
+                'type' => 'A', 
                 'options' => json_encode(['SteamVR', 'Occulus store', 'Viveport', 'Playstation VR', 'GooglePlay', 'Windows store'])
             ],
 
             [
-                'statement' => "Quel casque envisagez-vous d'acheter  dans un futur proche ?", 
-                'type' => 'select', 
+                'label' => "Quel casque envisagez-vous d'acheter  dans un futur proche ?", 
+                'type' => 'A', 
                 'options'=> json_encode(['Occulus Quest', 'Occulus Go', 'HTC Vive Pro', 'Autre', 'Aucun'])
             ],
 
             [
-                'statement' => 'Au sein de votre foyer, combien de personnes utilisent votre casque VR pour regarder BigScreen ?', 
-                'type' => 'choice',
+                'label' => 'Au sein de votre foyer, combien de personnes utilisent votre casque VR pour regarder BigScreen ?', 
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Vous utilisez principalement Bigscreen pour ?', 
-                'type' => 'select', 
+                'label' => 'Vous utilisez principalement Bigscreen pour ?', 
+                'type' => 'A', 
                 'options' => json_encode(['regarder des émissions TV en direct', 'regarder des films','jouer en solo', 'jouer en team'])
             ],
 
             [
-                'statement' => "Combien donnez-vous de points pour la qualité de l'image sur BigScreen ?", 
-                'type' => 'text',
+                'label' => "Combien donnez-vous de points pour la qualité de l'image sur BigScreen ?", 
+                'type' => 'B',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Combien donnez vous de point pour le confort d’utilisation de l’interface Bigscreen ?',
-                'type' => 'choice',
+                'label' => 'Combien donnez vous de point pour le confort d’utilisation de l’interface Bigscreen ?',
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Combien donnez vous de point pour la connection réseau de Bigscreen ?', 
-                'type' => 'choice',
+                'label' => 'Combien donnez vous de point pour la connection réseau de Bigscreen ?', 
+                'type' => 'C',
                 'options' => null
             ],
 
             [
-                'statement' => 'Combien donnez vous de point pour la qualité des graphismes 3D dans Bigscreen ?',
-                'type' => 'choice',
+                'label' => 'Combien donnez vous de point pour la qualité des graphismes 3D dans Bigscreen ?',
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Combien donnez vous de point pour la qualité audio dans Bigscreen ?', 
-                'type' => 'choice',
+                'label' => 'Combien donnez vous de point pour la qualité audio dans Bigscreen ?', 
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Aimeriez vous avoir des notifications plus précises au cours de vos sessions Bigscreen ?', 
-                'type' => 'select', 
+                'label' => 'Aimeriez vous avoir des notifications plus précises au cours de vos sessions Bigscreen ?', 
+                'type' => 'A', 
                 'options'=> json_encode(['oui', 'non'])
             ],
 
             [
-                'statement' => 'Aimeriez vous pouvoir inviter un ami à rejoindre votre session via son smartphone ?', 
-                'type' => 'select', 
+                'label' => 'Aimeriez vous pouvoir inviter un ami à rejoindre votre session via son smartphone ?', 
+                'type' => 'A', 
                 'options'=> json_encode(['oui', 'non'])
             ],
 
             [
-                'statement' => 'Aimeriez-vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?',
-                'type' => 'choice',
+                'label' => 'Aimeriez-vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?',
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Aimeriez vous jouer à des jeux exclusifs sur votre Bigscreen ?', 
-                'type' => 'choice',
+                'label' => 'Aimeriez vous jouer à des jeux exclusifs sur votre Bigscreen ?', 
+                'type' => 'C',
                 'options'=> null
             ],
 
             [
-                'statement' => 'Quelle nouvelle fonctionnalité de vos rêves devrait exister sur Bigscreen ?', 
-                'type' => 'text',
+                'label' => 'Quelle nouvelle fonctionnalité de vos rêves devrait exister sur Bigscreen ?', 
+                'type' => 'B',
                 'options'=> null
             ],
         ];

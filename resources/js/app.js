@@ -14,14 +14,10 @@ import Survey from './components/Survey.vue';
 
 Vue.use(VueRouter)
 Vue.component('survey', require('./components/Survey.vue').default);
-Vue.component('question', require('./components/Question.vue').default);
-
-
 
 const router = new VueRouter({
    routes
 })
-
 
 const routes = [{
     path: '*',
