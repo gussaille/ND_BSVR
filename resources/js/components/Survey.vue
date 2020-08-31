@@ -63,7 +63,6 @@ export default {
 			errors: {},
 			userAnswer: [],
 			isSubmit: false,
-			answered: []
 		}
 	},
 	mounted() {
@@ -76,7 +75,7 @@ export default {
 				this.answers.push({'question_id': index+1, 'response': element})
 			);
 
-			axios.post('/submit', {'answered' : this.answered}).then( res => {
+			axios.post('/submit', {'answers' : this.answers}).then( res => {
 				this.isSubmit = true;
 				alert('Formulaire envoyé');
 

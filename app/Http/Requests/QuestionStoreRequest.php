@@ -24,8 +24,9 @@ class QuestionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "answered.*.question_id" => "required",
-            "answered.*.response" => "required|string"
+            "answers" => "required|min:1",
+            "answers.*.question_id" => "required",
+            "answers.*.response" => "required|string"
         ];
     }
 

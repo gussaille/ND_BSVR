@@ -14,8 +14,10 @@ class Answer extends Model
 
         return $this->belongsTo(Question::class);
     }
-    public function surveys(){
 
-        return $this->belongsToMany(Survey::class);
+    public function survey()
+    {
+
+        return $this->belongsTo(Survey::class);
     }
 }

@@ -52,6 +52,7 @@
     options: {
         title: {
             display: true,
+            fontSize: 16,
             text: "Les marques de casques VR les plus utilisées"
         }
       }
@@ -78,6 +79,7 @@
       options: {
         title: {
             display: true,
+            fontSize: 16,
             text: "Les magasins où l'on achète du contenu VR"
         }
       }
@@ -101,6 +103,7 @@
       options: {
         title: {
             display: true,
+            fontSize: 16,
             text: 'Les pratiques sur BigScreen'
         }
     }
@@ -125,6 +128,7 @@
       options: {
         title: {
             display: true,
+            fontSize: 16,
             text: 'Notes des clients'
         }
       }

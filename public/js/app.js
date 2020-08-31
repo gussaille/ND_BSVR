@@ -2020,8 +2020,7 @@ __webpack_require__.r(__webpack_exports__);
       answers: [],
       errors: {},
       userAnswer: [],
-      isSubmit: false,
-      answered: []
+      isSubmit: false
     };
   },
   mounted: function mounted() {},
@@ -2037,7 +2036,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       axios.post('/submit', {
-        'answered': this.answered
+        'answers': this.answers
       }).then(function (res) {
         _this.isSubmit = true;
         alert('Formulaire envoyé');

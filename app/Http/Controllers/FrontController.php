@@ -27,16 +27,16 @@ class FrontController extends Controller
         
         // $answers = Answer::create($request->all());
 
-        // foreach($answers as $userAnswer){
-        //     $answer = Answer::create([
-        //         'response' => $answers['response'],
-        //         'question_id' => $answers['question_id']
-        //     ]);
-        //     // dd($answer);
-        // }
+        foreach($request->answers as $answer){
+            Answer::create([
+                'response' => $answer['response'],
+                'question_id' => $answer['question_id']
+            ]);
+            // dd($answer);
+        }
 
-        dd($request->all());
-        $answers = Answer::create($request->all());
+        //dd($request->all());
+       // $answers = Answer::createMany($request->all());
 
         // return response()->json(null, 200);
     }
