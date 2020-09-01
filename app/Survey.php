@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Survey extends Model
 {
-    public function answers(){
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-        return $this->hasMany(Answer::class);
-        
+    public function surveyUser()
+    {
+        return $this->hasMany(SurveyUser::class);
     }
 }

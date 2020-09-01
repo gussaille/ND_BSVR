@@ -7,17 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     protected $fillable = [
-        'response', 'question_id'
+        'response', 'question_id', 'survey_user_id'
     ];
 
-    public function question(){
-
+    public function question()
+    {
         return $this->belongsTo(Question::class);
     }
 
-    public function survey()
-    {
+    // public function survey()
+    // {
+    //     return $this->belongsTo(Survey::class);
+    // }
 
-        return $this->belongsTo(Survey::class);
+    public function surveyUser()
+    {
+        return $this->belongsTo(SurveyUser::class);
     }
 }
