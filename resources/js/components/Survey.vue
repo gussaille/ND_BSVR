@@ -21,7 +21,7 @@
 					<div v-else-if="question.type === 'A'">
 						<select name="selection" id="selection" v-model="userAnswer[index]">
 							<option value=""> Veuillez choisir une réponse </option>
-							<option v-for="item in question.options" :key="item" :value="item" >{{item}}</option>
+							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
 					</div>
 
@@ -36,6 +36,9 @@
 
 		</form>
 		<div class="survey__confirmation" v-if="isSubmit">
+
+			<img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="survey__confirmation__logo">
+
 			<p>Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
 				votre investissement, nous vous préparons une application toujours plus
 				facile à utiliser, seul ou en famille.
@@ -126,7 +129,26 @@ export default {
 			}
 		}
 		&__confirmation {
+			-webkit-animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;
+	        animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;	
 			font-size: 26px;
+			width: 90%;
+			max-width: 680px;
+			box-shadow: 1px 2px 10px lightgrey;
+			position: absolute;
+			top: 20%;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #343a40;
+			color: white;
+			box-sizing: border-box;
+			padding: 20px;
+
+			&__logo {
+				width: 300px;
+				margin: 10px auto;
+				display: block;
+			}
 		}
 
 		.errors {

@@ -5,9 +5,9 @@
     <nav class="panel__menu">
       <ul class="p-4 text-center text-dark text-bold">
 
-        <li><a href="{{ route('show_charts') }}">Accueil</a></li>
-        <li><a href="{{ route('show_questions') }}">Questionnaire</a></li>
-        <li><a href="{{ route('show_answers') }}">Réponses</a></li>
+        <li><a href="{{ route('admin.index') }}">Accueil</a></li>
+        <li><a href="{{ route('admin.questions') }}">Questionnaire</a></li>
+        <li><a href="{{ route('admin.answers') }}">Réponses</a></li>
 
       </ul>
     </nav>

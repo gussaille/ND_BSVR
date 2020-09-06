@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Question;
+use App\Survey;
 
 class QuestionTableSeeder extends Seeder
 {
@@ -13,7 +14,11 @@ class QuestionTableSeeder extends Seeder
     public function run()
     {
 
-        $questions = [
+        $survey = Survey::create([
+            'name' => 'Aidez-nous à améliorer notre app'
+        ]);
+
+        $survey->questions()->createMany([
             [
                 'label' => 'Votre adresse mail ?', 
                 'type' => 'B',
@@ -29,7 +34,7 @@ class QuestionTableSeeder extends Seeder
             [
                 'label' => 'Votre sexe ?', 
                 'type' => 'A', 
-                'options' => json_encode(['Homme', 'Femme', 'Préfère ne pas répondre'])
+                'options' => ['Homme', 'Femme', 'Préfère ne pas répondre']
             ],
 
             [
@@ -47,19 +52,19 @@ class QuestionTableSeeder extends Seeder
             [
                 'label' => 'Quelle marque de casque VR utilisez-vous ?', 
                 'type' => 'A', 
-                'options' => json_encode(['Occulus Rift/s', 'HTC Vive', 'Windows Mixed Reality', 'PSVR'])
+                'options' => ['Occulus Rift/s', 'HTC Vive', 'Windows Mixed Reality', 'PSVR']
             ],
 
             [
                 'label' => "Sur quel magasin d'application achetez-vous des contenus VR ?", 
                 'type' => 'A', 
-                'options' => json_encode(['SteamVR', 'Occulus store', 'Viveport', 'Playstation VR', 'GooglePlay', 'Windows store'])
+                'options' => ['SteamVR', 'Occulus store', 'Viveport', 'Playstation VR', 'GooglePlay', 'Windows store']
             ],
 
             [
                 'label' => "Quel casque envisagez-vous d'acheter  dans un futur proche ?", 
                 'type' => 'A', 
-                'options'=> json_encode(['Occulus Quest', 'Occulus Go', 'HTC Vive Pro', 'Autre', 'Aucun'])
+                'options'=> ['Occulus Quest', 'Occulus Go', 'HTC Vive Pro', 'Autre', 'Aucun']
             ],
 
             [
@@ -71,7 +76,7 @@ class QuestionTableSeeder extends Seeder
             [
                 'label' => 'Vous utilisez principalement Bigscreen pour ?', 
                 'type' => 'A', 
-                'options' => json_encode(['regarder des émissions TV en direct', 'regarder des films','jouer en solo', 'jouer en team'])
+                'options' => ['regarder des émissions TV en direct', 'regarder des films','jouer en solo', 'jouer en team']
             ],
 
             [
@@ -107,13 +112,13 @@ class QuestionTableSeeder extends Seeder
             [
                 'label' => 'Aimeriez vous avoir des notifications plus précises au cours de vos sessions Bigscreen ?', 
                 'type' => 'A', 
-                'options'=> json_encode(['oui', 'non'])
+                'options'=> ['oui', 'non']
             ],
 
             [
                 'label' => 'Aimeriez vous pouvoir inviter un ami à rejoindre votre session via son smartphone ?', 
                 'type' => 'A', 
-                'options'=> json_encode(['oui', 'non'])
+                'options'=> ['oui', 'non']
             ],
 
             [
@@ -133,8 +138,6 @@ class QuestionTableSeeder extends Seeder
                 'type' => 'B',
                 'options'=> null
             ],
-        ];
-
-        Question::insert($questions);
+        ]);
     }
 }

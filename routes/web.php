@@ -15,12 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/administration', 'Auth\LoginController@index');
-// Route::get('/administration/dashboard', 'Auth\LoginController@toDashboard');
-
-Route::get('/administration/survey', 'HomeController@questions')->name('show_questions');
-Route::get('/administration/dashboard', 'HomeController@charts')->name('show_charts');
-Route::get('/administration/answers', 'HomeController@answers')->name('show_answers');
+Route::prefix('administration')->middleware(['auth'])->group(function(){
+    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/survey', 'AdminController@questions')->name('admin.questions');
+    Route::get('/answers', 'AdminController@answers')->name('admin.answers');
+});
 
 
 // Route::post('post-login', 'Auth\LoginController@postLogin'); 
@@ -33,4 +32,4 @@ Route::post('/submit', 'FrontController@store');
 
 // Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/Admin', 'AdminController@index')->name('Admin');

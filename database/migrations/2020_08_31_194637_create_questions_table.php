@@ -15,11 +15,12 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->text('label');	
             $table->enum('type', ['A', 'B', 'C']);
             $table->string('options')->nullable();
             $table->integer('order')->nullable();
+            $table->foreignId('survey_id')->constrained();
+            $table->timestamps();
         });
     }
 

@@ -73,6 +73,40 @@ $cyan: #6cb2eb;
 		transform: scale(0.7);
 	}
 	to {
-		transform: scale(1);
+		transform: scale(1) translateX(-50%);
 	}
 }
+
+ @-webkit-keyframes scale-in-top {
+	0% {
+	  -webkit-transform: scale(0) translateX(-50%);
+			  transform: scale(0) translateX(-50%);
+	  -webkit-transform-origin: 50% 0%;
+			  transform-origin: 50% 0%;
+	  opacity: 1;
+	}
+	100% {
+	  -webkit-transform: scale(1) translateX(-50%);
+			  transform: scale(1) translateX(-50%);
+	  -webkit-transform-origin: 50% 0%;
+			  transform-origin: 50% 0%;
+	  opacity: 1;
+	}
+  }
+  @keyframes scale-in-top {
+	0% {
+	  -webkit-transform: scale(0) translateX(-50%);
+			  transform: scale(0) translateX(-50%);
+	  -webkit-transform-origin: 50% 0%;
+			  transform-origin: 50% 0%;
+	  opacity: 1;
+	}
+	100% {
+	  -webkit-transform: scale(1) translateX(-50%);
+			  transform: scale(1) translateX(-50%);
+	  -webkit-transform-origin: 50% 0%;
+			  transform-origin: 50% 0%;
+	  opacity: 1;
+	}
+  }
+  

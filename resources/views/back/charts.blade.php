@@ -4,7 +4,7 @@
 
 <div class="dashboard-container">
   
-  @include('back.panel')
+  @include('back.menu')
 
   <div class="information">
 

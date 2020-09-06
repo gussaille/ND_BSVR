@@ -151,7 +151,7 @@ q:after {
   }
 
   to {
-    transform: scale(1);
+    transform: scale(1) translateX(-50%);
   }
 }
 
@@ -161,7 +161,35 @@ q:after {
   }
 
   to {
-    transform: scale(1);
+    transform: scale(1) translateX(-50%);
+  }
+}
+
+@-webkit-keyframes scale-in-top {
+  0% {
+    transform: scale(0) translateX(-50%);
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) translateX(-50%);
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in-top {
+  0% {
+    transform: scale(0) translateX(-50%);
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) translateX(-50%);
+    transform-origin: 50% 0%;
+    opacity: 1;
   }
 }
 

@@ -15,10 +15,10 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('response')->nullable();
             $table->foreignId('question_id')->constrained();
-            $table->foreignId('survey_user_id')->nullable()->constrained();
+            $table->foreignId('survey_user_id')->nullable()->constrained('survey_user');
+            $table->timestamps();
         });
     }
 

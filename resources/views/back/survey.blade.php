@@ -4,7 +4,7 @@
 
 <div class="dashboard-container">
   
-  @include('back.panel')
+  @include('back.menu')
 
   <div class="information information--survey">
 
@@ -23,7 +23,7 @@
           @foreach ($questions as $question)
           <tr>
             <th scope="row">{{$question->id}}</th>
-            <td>{{$question->statement}}</td>
+            <td>{{$question->label}}</td>
             <td>{{$question->type}}</td>
           </tr>
           @endforeach
