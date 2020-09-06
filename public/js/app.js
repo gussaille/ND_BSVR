@@ -1957,6 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Survey',
   data: function data() {
@@ -6428,7 +6429,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  font-size: 26px;\n}", ""]);
+exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  font-size: 26px;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
 
 // exports
 
@@ -38283,7 +38284,13 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.answers
+                          ? _c("small", { staticClass: "errors" }, [
+                              _vm._v(_vm._s(_vm.errors.answers[0]))
+                            ])
+                          : _vm._e()
                       ])
                     : question.type === "A"
                     ? _c("div", [

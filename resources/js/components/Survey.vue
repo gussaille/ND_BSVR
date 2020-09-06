@@ -15,6 +15,7 @@
 
 					<div v-if="question.type === 'B'">
 						<textarea placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						<small class="errors" v-if="errors.answers">{{ errors.answers[0] }}</small>
 					</div>
 
 					<div v-else-if="question.type === 'A'">
@@ -126,6 +127,12 @@ export default {
 		}
 		&__confirmation {
 			font-size: 26px;
+		}
+
+		.errors {
+			display: block;
+			color: red;
+			margin: 5px 0;
 		}
 	}
 </style>

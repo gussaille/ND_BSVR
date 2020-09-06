@@ -21,23 +21,11 @@ class FrontController extends Controller
 
     public function store(QuestionStoreRequest $request) 
     {
-
-        // var_dump($request->all());
-        // $answers = $request->all();
-        
-        // $answers = Answer::create($request->all());
-
         foreach($request->answers as $answer){
             Answer::create([
                 'response' => $answer['response'],
-                'question_id' => $answer['question_id']
+                'question_id' => $answer['question_id'],
             ]);
-            // dd($answer);
         }
-
-        //dd($request->all());
-       // $answers = Answer::createMany($request->all());
-
-        // return response()->json(null, 200);
     }
 }

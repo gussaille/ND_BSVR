@@ -23,7 +23,6 @@ Route::get('/administration/dashboard', 'HomeController@charts')->name('show_cha
 Route::get('/administration/answers', 'HomeController@answers')->name('show_answers');
 
 
-
 // Route::post('post-login', 'Auth\LoginController@postLogin'); 
 // // Route::get('/administration/dashboard', 'Auth\LoginController@dashboard'); 
 // Route::get('logout', 'Auth\LoginController@logout');
