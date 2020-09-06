@@ -1,7 +1,7 @@
 <template>
     <div class="survey">
 		<div class="survey__presentation" v-if="!isSubmit">
-			<h1>BigScreen</h1>
+			<img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="survey__presentation__logo">
 			<p>Merci de répondre à toutes les questions et de valider le formulaire en bas de page.</p>
 		</div>
 		
@@ -9,7 +9,7 @@
 
 			<div v-for="(question, index) in questions" class="question" :key="index">
 				<h1>Question {{question.id}}/20</h1>
-				<h2>{{question.statement}}</h2>
+				<h2>{{question.label}}</h2>
 
 				<div class="question__answer">
 
@@ -20,13 +20,18 @@
 
 					<div v-else-if="question.type === 'A'">
 						<select name="selection" id="selection" v-model="userAnswer[index]">
-							<option value=""> Veuillez choisir une réponse </option>
+							<option value="" disabled> Veuillez choisir une réponse </option>
 							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
+
+						<small class="errors" v-if="errors.answers">{{ errors.answers[0] }}</small>
+
 					</div>
 
 					<div v-else>
 						<input type="number" min="1" max="5" v-model="userAnswer[index]">
+						<small class="errors" v-if="errors.answers">{{ errors.answers[0] }}</small>
+
 					</div>
 					
 				</div>
@@ -91,12 +96,18 @@ export default {
 
 	.survey{
 		width: 100%;
+		background-color: lightgrey;
 		margin: 0 auto;
 		
 		&__presentation, form {
 			margin: 0 auto;
 			width: 90%;
 			max-width: 800px;
+			
+			&__logo {
+				margin: 0;
+				width: 300px;
+			}
 		}
 		
 		button {
@@ -105,13 +116,14 @@ export default {
 			display: block;
 		}
 		.question {
+			color: white;
 			box-sizing: border-box;
 			padding: 15px;
-			width: 90%;
+			width: 100%;
 			margin: 0 auto;
 			max-width: 800px;
-			background-color: lightgrey;
-			margin: 10px auto;
+			background-color: #343a40;
+			margin: 15px auto 30px;
 
 			&__answer {
 				

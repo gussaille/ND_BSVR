@@ -300,6 +300,11 @@ q:after {
   max-width: 700px !important;
 }
 
+.answer-table {
+  height: 400px;
+  overflow-y: scroll;
+}
+
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

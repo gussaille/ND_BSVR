@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\User;
-use App\UsersAnswer;
+use App\Answer;
 
 class AdminController extends Controller
 {
@@ -26,8 +26,9 @@ class AdminController extends Controller
 
     public function answers()
     {
-
-       return view('back.answers');
+        $questions = Question::all();
+        $answers = Answer::all();
+        return view('back.answers', ['answers' => $answers, 'questions' => $questions]);
 
     }
 }

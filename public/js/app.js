@@ -1961,6 +1961,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Survey',
   data: function data() {
@@ -6432,7 +6437,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 15px;\n  width: 90%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: lightgrey;\n  margin: 10px auto;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 26px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #343a40;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
+exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  background-color: lightgrey;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885], .survey form__logo[data-v-52541885] {\n  margin: 0;\n  width: 300px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  color: white;\n  box-sizing: border-box;\n  padding: 15px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: #343a40;\n  margin: 15px auto 30px;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 26px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #343a40;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
 
 // exports
 
@@ -38230,7 +38235,10 @@ var render = function() {
   return _c("div", { staticClass: "survey" }, [
     !_vm.isSubmit
       ? _c("div", { staticClass: "survey__presentation" }, [
-          _c("h1", [_vm._v("BigScreen")]),
+          _c("img", {
+            staticClass: "survey__presentation__logo",
+            attrs: { src: "/img/bigscreen_logo.png", alt: "Logo BigScreen" }
+          }),
           _vm._v(" "),
           _c("p", [
             _vm._v(
@@ -38256,7 +38264,7 @@ var render = function() {
               return _c("div", { key: index, staticClass: "question" }, [
                 _c("h1", [_vm._v("Question " + _vm._s(question.id) + "/20")]),
                 _vm._v(" "),
-                _c("h2", [_vm._v(_vm._s(question.statement))]),
+                _c("h2", [_vm._v(_vm._s(question.label))]),
                 _vm._v(" "),
                 _c("div", { staticClass: "question__answer" }, [
                   question.type === "B"
@@ -38330,9 +38338,11 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v(" Veuillez choisir une réponse ")
-                            ]),
+                            _c(
+                              "option",
+                              { attrs: { value: "", disabled: "" } },
+                              [_vm._v(" Veuillez choisir une réponse ")]
+                            ),
                             _vm._v(" "),
                             _vm._l(question.options, function(item, num) {
                               return _c(
@@ -38343,7 +38353,13 @@ var render = function() {
                             })
                           ],
                           2
-                        )
+                        ),
+                        _vm._v(" "),
+                        _vm.errors.answers
+                          ? _c("small", { staticClass: "errors" }, [
+                              _vm._v(_vm._s(_vm.errors.answers[0]))
+                            ])
+                          : _vm._e()
                       ])
                     : _c("div", [
                         _c("input", {
@@ -38369,7 +38385,13 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.answers
+                          ? _c("small", { staticClass: "errors" }, [
+                              _vm._v(_vm._s(_vm.errors.answers[0]))
+                            ])
+                          : _vm._e()
                       ])
                 ])
               ])
