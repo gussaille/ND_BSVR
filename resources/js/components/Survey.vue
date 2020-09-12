@@ -16,6 +16,8 @@
 					<div v-if="question.type === 'B'">
 						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre réponse" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255"></input>
 						
+						<small v-if="question.id === 1" class="message">{{ emailChecked }}</small>
+
 						<textarea v-else :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
 						
 						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
@@ -65,7 +67,7 @@ export default {
 	name: 'Survey',
 	data() {
 		return {
-			
+			emailChecked: false,
 			questions: questions,
 			answers: [],
 			errors: {},
@@ -78,9 +80,11 @@ export default {
 	},
 	methods: {
 		checkEmail(){
-			axios.post('/user/email', {'email': this.userAnswer[0]}).then(res =>{
-				console.log(res);
-			}).catch(err=>{
+			axios.post('/user/email', {'email': this.userAnswer[0]})
+			.then(res =>{
+				this.emailChecked = res.data;
+			})
+			.catch(err=>{
 				console.log(err);
 			})
 		},

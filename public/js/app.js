@@ -1971,10 +1971,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Survey',
   data: function data() {
     return {
+      emailChecked: false,
       questions: questions,
       answers: [],
       errors: {},
@@ -1985,19 +1988,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   mounted: function mounted() {},
   methods: {
     checkEmail: function checkEmail() {
+      var _this = this;
+
       axios.post('/user/email', {
         'email': this.userAnswer[0]
       }).then(function (res) {
-        console.log(res);
+        _this.emailChecked = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
     },
     submit: function submit() {
-      var _this = this;
+      var _this2 = this;
 
       this.userAnswer.forEach(function (element, index) {
-        return _this.answers.push({
+        return _this2.answers.push({
           'question_id': index + 1,
           'response': element
         });
@@ -2005,15 +2010,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       axios.post('/submit', {
         'answers': this.answers
       }).then(function (res) {
-        _this.isSubmit = true;
+        _this2.isSubmit = true;
       })["catch"](function (err) {
         var status = err.response.status;
         var messages = err.response.data.errors;
-        _this.errors = {};
+        _this2.errors = {};
 
         if (_typeof(messages) === 'object') {
           Object.keys(messages).forEach(function (index) {
-            return _this.errors[index] = messages[index][0];
+            return _this2.errors[index] = messages[index][0];
           });
         } else {
           alert('Une erreur est survenue (' + status + ')');
@@ -38320,6 +38325,12 @@ var render = function() {
                                 }
                               }
                             })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        question.id === 1
+                          ? _c("small", { staticClass: "message" }, [
+                              _vm._v(_vm._s(_vm.emailChecked))
+                            ])
                           : _c("textarea", {
                               directives: [
                                 {

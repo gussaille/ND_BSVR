@@ -17,13 +17,12 @@ class SurveyController extends Controller
 
     public function checkEmail(Request $request){
 
-        $user = User::all()->where('email', "=", $request->all())->first();
+        $emailChecked = User::select('email')->where('email', $request->email)->exists();
 
-        dd($user);
-        if ($user) {
-           dd('is already existing');
+        if ($emailChecked === true) {
+           return 'Email valide';
         } else {
-            dd('not existing');
+            return "Cet email n'existe pas en base";
         }
     }
 }
