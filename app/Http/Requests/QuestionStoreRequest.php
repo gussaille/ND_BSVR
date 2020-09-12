@@ -33,6 +33,9 @@ class QuestionStoreRequest extends FormRequest
 
     public function  messages()
     {
-        return [ 'response.required' => 'Champs requis', 'response.string' => 'doit être une chaine de caractère'];
+        return [ 
+            'answers.required' => 'Champs requis', 
+            'answers.string' => 'doit être une chaîne de caractère'
+        ];
     }
 }

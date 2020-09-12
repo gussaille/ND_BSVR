@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -1982,7 +1984,6 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      this.errors = {};
       this.userAnswer.forEach(function (element, index) {
         return _this.answers.push({
           'question_id': index + 1,
@@ -1993,10 +1994,17 @@ __webpack_require__.r(__webpack_exports__);
         'answers': this.answers
       }).then(function (res) {
         _this.isSubmit = true;
-        console.log(_this.answers);
-      })["catch"](function (error) {
-        if (error.response.status === 422) {
-          _this.errors = error.response.data.errors || {};
+      })["catch"](function (err) {
+        var status = err.response.status;
+        var messages = err.response.data.errors;
+        _this.errors = {};
+
+        if (_typeof(messages) === 'object') {
+          Object.keys(messages).forEach(function (index) {
+            return _this.errors[index] = messages[index][0];
+          });
+        } else {
+          alert('Une erreur est survenue (' + status + ')');
         }
       });
     }
@@ -6437,7 +6445,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  background-color: lightgrey;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885], .survey form__logo[data-v-52541885] {\n  margin: 0;\n  width: 300px;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n}\n.survey .question[data-v-52541885] {\n  color: white;\n  box-sizing: border-box;\n  padding: 15px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: #343a40;\n  margin: 15px auto 30px;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 26px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #343a40;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
+exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  background-color: lightgrey;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885], .survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885], .survey form__logo[data-v-52541885] {\n  margin: 0 auto;\n  width: 300px;\n  display: block;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation__logo[data-v-52541885], .survey form__logo[data-v-52541885] {\n    margin: 0;\n}\n}\n.survey__presentation p[data-v-52541885] {\n  margin-bottom: 5px;\n  font-size: 14px;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation p[data-v-52541885] {\n    font-size: 18px;\n}\n}\n.survey form[data-v-52541885] {\n  padding: 5px 0 20px;\n  box-sizing: border-box;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n  text-transform: uppercase;\n  font-size: 24px;\n}\n.survey .question[data-v-52541885] {\n  color: white;\n  box-sizing: border-box;\n  padding: 15px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: #343a40;\n  margin: 15px auto 30px;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 26px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #343a40;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
 
 // exports
 
@@ -38279,6 +38287,7 @@ var render = function() {
                             }
                           ],
                           attrs: {
+                            name: "answer" + index,
                             placeholder: "Veuillez saisir votre réponse",
                             maxlength: "255"
                           },
@@ -38299,7 +38308,7 @@ var render = function() {
                         _vm._v(" "),
                         _vm.errors.answers
                           ? _c("small", { staticClass: "errors" }, [
-                              _vm._v(_vm._s(_vm.errors.answers[0]))
+                              _vm._v(_vm._s(_vm.errors.answers))
                             ])
                           : _vm._e()
                       ])
@@ -38316,7 +38325,7 @@ var render = function() {
                                 expression: "userAnswer[index]"
                               }
                             ],
-                            attrs: { name: "selection", id: "selection" },
+                            attrs: { name: "answer" + index, id: "selection" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -38357,7 +38366,7 @@ var render = function() {
                         _vm._v(" "),
                         _vm.errors.answers
                           ? _c("small", { staticClass: "errors" }, [
-                              _vm._v(_vm._s(_vm.errors.answers[0]))
+                              _vm._v(_vm._s(_vm.errors.answers))
                             ])
                           : _vm._e()
                       ])
@@ -38371,7 +38380,12 @@ var render = function() {
                               expression: "userAnswer[index]"
                             }
                           ],
-                          attrs: { type: "number", min: "1", max: "5" },
+                          attrs: {
+                            name: "answer" + index,
+                            type: "number",
+                            min: "1",
+                            max: "5"
+                          },
                           domProps: { value: _vm.userAnswer[index] },
                           on: {
                             input: function($event) {
@@ -38389,7 +38403,7 @@ var render = function() {
                         _vm._v(" "),
                         _vm.errors.answers
                           ? _c("small", { staticClass: "errors" }, [
-                              _vm._v(_vm._s(_vm.errors.answers[0]))
+                              _vm._v(_vm._s(_vm.errors.answers))
                             ])
                           : _vm._e()
                       ])

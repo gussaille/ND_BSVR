@@ -81,7 +81,7 @@ class QuestionTableSeeder extends Seeder
 
             [
                 'label' => "Combien donnez-vous de points pour la qualité de l'image sur BigScreen ?", 
-                'type' => 'B',
+                'type' => 'C',
                 'options'=> null
             ],
 

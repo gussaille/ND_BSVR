@@ -14,23 +14,23 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<textarea placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
-						<small class="errors" v-if="errors.answers">{{ errors.answers[0] }}</small>
+						<textarea :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 					</div>
 
 					<div v-else-if="question.type === 'A'">
-						<select name="selection" id="selection" v-model="userAnswer[index]">
+						<select :name="'answer'+index" id="selection" v-model="userAnswer[index]">
 							<option value="" disabled> Veuillez choisir une réponse </option>
 							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
 
-						<small class="errors" v-if="errors.answers">{{ errors.answers[0] }}</small>
+						<small class="errors" v-if="errors.answers">{{errors.answers }}</small>
 
 					</div>
 
 					<div v-else>
-						<input type="number" min="1" max="5" v-model="userAnswer[index]">
-						<small class="errors" v-if="errors.answers">{{ errors.answers[0] }}</small>
+						<input :name="'answer'+index" type="number" min="1" max="5" v-model="userAnswer[index]">
+						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 
 					</div>
 					
@@ -75,17 +75,23 @@ export default {
 	},
 	methods: {
     	submit() {
-			this.errors = {};
 			this.userAnswer.forEach((element, index) => 
 				this.answers.push({'question_id': index+1, 'response': element})
 			);
 
-			axios.post('/submit', {'answers' : this.answers}).then( res => {
+			axios.post('/submit', {'answers' : this.answers})
+			.then( res => {
 				this.isSubmit = true;
-				console.log(this.answers);
-			}).catch( error => {
-				if (error.response.status === 422) {
-					this.errors = error.response.data.errors || {};
+			})
+			.catch( err => {
+				let status = err.response.status;
+				let messages = err.response.data.errors;
+				this.errors = {};
+
+				if (typeof (messages) === 'object') {
+					Object.keys(messages).forEach((index) => this.errors[index] = messages[index][0]);
+				} else {
+					alert('Une erreur est survenue (' + status + ')');
 				}
 			});
 		},
@@ -105,16 +111,41 @@ export default {
 			max-width: 800px;
 			
 			&__logo {
-				margin: 0;
+				margin: 0 auto;
 				width: 300px;
+				display: block;
+
+				@media screen and (min-width: 800px){
+					margin: 0;
+				}
 			}
+		}
+
+		&__presentation {
+			p{
+				margin-bottom: 5px;
+				font-size: 14px;
+
+				@media screen and(min-width: 800px){
+					font-size: 18px;
+				}
+			}
+		}
+		
+		form {
+			padding: 5px 0 20px;
+			box-sizing: border-box;
 		}
 		
 		button {
 			width: 300px;
-			margin: 0 auto;
+			margin: 0 auto;;
 			display: block;
+			text-transform: uppercase;
+			font-size: 24px;
 		}
+
+		
 		.question {
 			color: white;
 			box-sizing: border-box;
