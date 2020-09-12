@@ -26,6 +26,8 @@ Route::prefix('administration')->middleware(['auth'])->group(function(){
 // // Route::get('/administration/dashboard', 'Auth\LoginController@dashboard'); 
 // Route::get('logout', 'Auth\LoginController@logout');
 
+Route::post('/user/email', 'SurveyController@checkEmail');
+
 Route::get('/', 'FrontController@index');
 Route::post('/submit', 'FrontController@store');
 

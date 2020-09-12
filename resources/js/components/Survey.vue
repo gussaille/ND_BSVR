@@ -14,7 +14,10 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<textarea :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre réponse" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255"></input>
+						
+						<textarea v-else :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						
 						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 					</div>
 
@@ -74,6 +77,13 @@ export default {
 		
 	},
 	methods: {
+		checkEmail(){
+			axios.post('/user/email', {'email': this.userAnswer[0]}).then(res =>{
+				console.log(res);
+			}).catch(err=>{
+				console.log(err);
+			})
+		},
     	submit() {
 			this.userAnswer.forEach((element, index) => 
 				this.answers.push({'question_id': index+1, 'response': element})
@@ -105,7 +115,8 @@ export default {
 		background-color: lightgrey;
 		margin: 0 auto;
 		
-		&__presentation, form {
+		&__presentation, 
+		form {
 			margin: 0 auto;
 			width: 90%;
 			max-width: 800px;
@@ -150,6 +161,7 @@ export default {
 			color: white;
 			box-sizing: border-box;
 			padding: 15px;
+			border-radius: 12px;
 			width: 100%;
 			margin: 0 auto;
 			max-width: 800px;
