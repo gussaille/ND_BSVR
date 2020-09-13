@@ -1971,8 +1971,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Survey',
   data: function data() {
@@ -2001,20 +1999,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     submit: function submit() {
       var _this2 = this;
 
-      this.userAnswer.forEach(function (element, index) {
+      this.userAnswer.map(function (response, index) {
         return _this2.answers.push({
-          'question_id': index + 1,
-          'response': element
+          question_id: index + 1,
+          response: response
         });
       });
       axios.post('/submit', {
-        'answers': this.answers
+        answers: this.answers
       }).then(function (res) {
-        _this2.isSubmit = true;
+        console.log(res); // this.isSubmit = true;
       })["catch"](function (err) {
         var status = err.response.status;
         var messages = err.response.data.errors;
         _this2.errors = {};
+        _this2.userAnswer = [];
 
         if (_typeof(messages) === 'object') {
           Object.keys(messages).forEach(function (index) {
@@ -38306,7 +38305,7 @@ var render = function() {
                               ],
                               attrs: {
                                 type: "email",
-                                name: "answer" + index,
+                                name: "answers[" + index + "]",
                                 placeholder:
                                   "Veuillez saisir votre adresse email",
                                 maxlength: "255"
@@ -38354,7 +38353,7 @@ var render = function() {
                                   ? "disabled"
                                   : "check",
                               attrs: {
-                                name: "answer" + index,
+                                name: "answers[" + index + "]",
                                 placeholder: "Veuillez saisir votre réponse",
                                 maxlength: "255"
                               },
@@ -38371,13 +38370,7 @@ var render = function() {
                                   )
                                 }
                               }
-                            }),
-                        _vm._v(" "),
-                        _vm.errors.answers
-                          ? _c("small", { staticClass: "errors" }, [
-                              _vm._v(_vm._s(_vm.errors.answers))
-                            ])
-                          : _vm._e()
+                            })
                       ])
                     : question.type === "A"
                     ? _c("div", [
@@ -38396,7 +38389,10 @@ var render = function() {
                               _vm.emailChecked[0] !== true
                                 ? "disabled"
                                 : "check",
-                            attrs: { name: "answer" + index, id: "selection" },
+                            attrs: {
+                              name: "answers[" + index + "]",
+                              id: "selection"
+                            },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -38433,13 +38429,7 @@ var render = function() {
                             })
                           ],
                           2
-                        ),
-                        _vm._v(" "),
-                        _vm.errors.answers
-                          ? _c("small", { staticClass: "errors" }, [
-                              _vm._v(_vm._s(_vm.errors.answers))
-                            ])
-                          : _vm._e()
+                        )
                       ])
                     : _c("div", [
                         _c("input", {
@@ -38454,7 +38444,7 @@ var render = function() {
                           class:
                             _vm.emailChecked[0] !== true ? "disabled" : "check",
                           attrs: {
-                            name: "answer" + index,
+                            name: "answers[" + index + "]",
                             type: "number",
                             min: "1",
                             max: "5"
@@ -38472,17 +38462,17 @@ var render = function() {
                               )
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.answers
-                          ? _c("small", { staticClass: "errors" }, [
-                              _vm._v(_vm._s(_vm.errors.answers))
-                            ])
-                          : _vm._e()
+                        })
                       ])
                 ])
               ])
             }),
+            _vm._v(" "),
+            _vm.errors.answers
+              ? _c("small", { staticClass: "errors" }, [
+                  _vm._v(_vm._s(_vm.errors.answers))
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "button",

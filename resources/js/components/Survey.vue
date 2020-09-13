@@ -14,33 +14,31 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre adresse email" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255">
+						<input v-if="question.id === 1" type='email' :name="`answers[${index}]`" placeholder="Veuillez saisir votre adresse email" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255">
 						
 						<small v-if="question.id === 1" :class="emailChecked[0] === true ? 'valid' : 'invalid'" class="email-message">{{ emailChecked[1] }}</small>
 
-						<textarea v-else :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
-						
-						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
-					</div>
+						<textarea v-else :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="`answers[${index}]`" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+
+					</div> 
 
 					<div v-else-if="question.type === 'A'">
-						<select :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="'answer'+index" id="selection" v-model="userAnswer[index]">
+						<select :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="`answers[${index}]`" id="selection" v-model="userAnswer[index]">
 							<option value="" disabled> Veuillez choisir une réponse </option>
 							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
-
-						<small class="errors" v-if="errors.answers">{{errors.answers }}</small>
-
 					</div>
 
 					<div v-else>
-						<input :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="'answer'+index" type="number" min="1" max="5" v-model="userAnswer[index]">
-						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
-
+						<input :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="`answers[${index}]`" type="number" min="1" max="5" v-model="userAnswer[index]">
 					</div>
 					
 				</div>
+
 			</div>
+
+			<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
+
 
 			<button type="submit" class="btn btn-primary">Finaliser</button>
 
@@ -89,18 +87,20 @@ export default {
 			})
 		},
     	submit() {
-			this.userAnswer.forEach((element, index) => 
-				this.answers.push({'question_id': index+1, 'response': element})
+			this.userAnswer.map((response, index) => 
+				this.answers.push({question_id: index+1, response: response})
 			);
 
-			axios.post('/submit', {'answers' : this.answers})
+			axios.post('/submit', {answers : this.answers})
 			.then( res => {
-				this.isSubmit = true;
+				console.log(res);
+				// this.isSubmit = true;
 			})
 			.catch( err => {
 				let status = err.response.status;
 				let messages = err.response.data.errors;
 				this.errors = {};
+				this.userAnswer = [];
 
 				if (typeof (messages) === 'object') {
 					Object.keys(messages).forEach((index) => this.errors[index] = messages[index][0]);

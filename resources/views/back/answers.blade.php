@@ -15,19 +15,24 @@
 
             {{-- Rajouter loop = Tableau pour chaque questionnaire d'utilisateur -> foreach --}}
 
-            <table class="table table-striped answer-table">
-              @foreach ($questions as $question)
 
-                <tbody>
-                  <tr>
-                    <th scope="row">{{ $question->id }}</th>
-                    <td>{{ $question->label }}</td>
-                    <td> Réponse </td>
-                  </tr>
-                </tbody>
+            {{-- @foreach($surveyUser as $answer) --}}
 
-                @endforeach
-            </table>
+              <table class="table table-striped answer-table">
+                @foreach ($questions as $question)
+
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{ $question->id }}</th>
+                      <td>{{ $question->label }}</td>
+                      <td> Réponse </td>
+                    </tr>
+                  </tbody>
+
+                  @endforeach
+              </table>
+
+            {{-- @endforeach --}}
 
       </div>
     </div>

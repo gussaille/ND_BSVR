@@ -23,19 +23,23 @@ class QuestionStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            "answers" => "required|min:1",
+        $rules = [
+            "answers" => "array|min:19",
             "answers.*.question_id" => "required",
             "answers.*.response" => "required|string"
         ];
+
+        return $rules;
     }
 
 
     public function  messages()
     {
-        return [ 
-            'answers.required' => 'Champs requis', 
-            'answers.string' => 'doit être une chaîne de caractère'
+        $messages = [ 
+            'answers.min' => 'Veuillez remplir tous les champs.', 
+            'answers.*.response.required' => 'doit être une chaine de caractère'
         ];
+        
+        return $messages;
     }
 }
