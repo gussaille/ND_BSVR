@@ -14,9 +14,9 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre réponse" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255"></input>
+						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre réponse" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255">
 						
-						<small v-if="question.id === 1" class="message">{{ emailChecked }}</small>
+						<small v-if="question.id === 1" :class="emailChecked[0] === true ? 'valid' : 'invalid'" class="email-message">{{ emailChecked[1] }}</small>
 
 						<textarea v-else :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
 						
@@ -67,7 +67,7 @@ export default {
 	name: 'Survey',
 	data() {
 		return {
-			emailChecked: false,
+			emailChecked: [],
 			questions: questions,
 			answers: [],
 			errors: {},
@@ -184,6 +184,15 @@ export default {
 					max-height: 100px;
 					width:80%;
 					max-width: 500px; 
+				}
+
+				.email-message{
+					&.invalid{
+						color: red;
+					}
+					&.valid {
+						color: rgb(22, 145, 22);
+					}
 				}
 			}
 		}

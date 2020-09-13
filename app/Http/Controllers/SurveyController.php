@@ -18,11 +18,10 @@ class SurveyController extends Controller
     public function checkEmail(Request $request){
 
         $emailChecked = User::select('email')->where('email', $request->email)->exists();
-
         if ($emailChecked === true) {
-           return 'Email valide';
+           return [true, "L'email est valide"];
         } else {
-            return "Cet email n'existe pas en base";
+            return [false, "L'email n'est pas valide"];
         }
     }
 }
