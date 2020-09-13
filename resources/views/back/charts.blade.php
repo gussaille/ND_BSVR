@@ -106,7 +106,7 @@
             fontSize: 16,
             text: 'Les pratiques sur BigScreen'
         }
-    }
+      }
     });
 
     var ctx4 = document.querySelector("#canvas4").getContext('2d');
@@ -122,7 +122,7 @@
             'black',
             'purple'
           ],
-          data: [2, 3, 4, 5, 5]
+          data: [5, 3, 4, 4, 5]
         }]
       },
       options: {
@@ -133,7 +133,7 @@
         }
       }
     });
-
+    
 </script>
 @endsection
 

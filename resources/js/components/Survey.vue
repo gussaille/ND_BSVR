@@ -14,17 +14,17 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre réponse" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255">
+						<input v-if="question.id === 1" type='email' :name="'answer'+index" placeholder="Veuillez saisir votre adresse email" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255">
 						
 						<small v-if="question.id === 1" :class="emailChecked[0] === true ? 'valid' : 'invalid'" class="email-message">{{ emailChecked[1] }}</small>
 
-						<textarea v-else :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						<textarea v-else :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="'answer'+index" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
 						
 						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 					</div>
 
 					<div v-else-if="question.type === 'A'">
-						<select :name="'answer'+index" id="selection" v-model="userAnswer[index]">
+						<select :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="'answer'+index" id="selection" v-model="userAnswer[index]">
 							<option value="" disabled> Veuillez choisir une réponse </option>
 							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
@@ -34,7 +34,7 @@
 					</div>
 
 					<div v-else>
-						<input :name="'answer'+index" type="number" min="1" max="5" v-model="userAnswer[index]">
+						<input :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="'answer'+index" type="number" min="1" max="5" v-model="userAnswer[index]">
 						<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 
 					</div>
@@ -186,6 +186,11 @@ export default {
 					max-width: 500px; 
 				}
 
+				input[type="email"]{
+					width: 80%;
+					max-width: 300px;
+				}
+
 				.email-message{
 					&.invalid{
 						color: red;
@@ -193,6 +198,11 @@ export default {
 					&.valid {
 						color: rgb(22, 145, 22);
 					}
+				}
+
+				.disabled {
+					pointer-events: none;
+					background-color: lightgrey;
 				}
 			}
 		}

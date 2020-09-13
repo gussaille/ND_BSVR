@@ -19,9 +19,9 @@ class SurveyController extends Controller
 
         $emailChecked = User::select('email')->where('email', $request->email)->exists();
         if ($emailChecked === true) {
-           return [true, "L'email est valide"];
+           return [true, "Email valide"];
         } else {
-            return [false, "L'email n'est pas valide"];
+            return [false, "Email inconnu"];
         }
     }
 }
