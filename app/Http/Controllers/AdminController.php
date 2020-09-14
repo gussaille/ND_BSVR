@@ -26,7 +26,13 @@ class AdminController extends Controller
 
     public function showAnswers()
     {
-        $surveyUsers = SurveyUser::pluck('id');
+        $surveyUsers = SurveyUser::all();
+
+        foreach($surveyUsers as $surveyUser){
+            foreach($surveyUser->answers as $answer){
+                $userAnswer = $answer->response;
+            };
+        }
 
         $questions = Question::all();
 

@@ -12,8 +12,6 @@
 
           <h1 class="text-center">Réponses des sondés</h1>
 
-            {{-- Rajouter loop = Tableau pour chaque questionnaire d'utilisateur -> foreach --}}
-
               @forelse($surveyUsers as $surveyUser)
 
                 <table class="table table-striped answer-table mb-3">
@@ -24,11 +22,13 @@
                       <tr>
                         <th scope="row">{{$question->id}}</th>
                         <td>{{$question->label}}</td></td>
-                        <td>Réponse</td>
+                        <td>{{$userAnswer}}
+                        </td>
                       </tr>
                     </tbody>
 
                     @endforeach
+
                 </table>
 
               @empty

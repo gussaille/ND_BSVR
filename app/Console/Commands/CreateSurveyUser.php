@@ -43,7 +43,6 @@ class CreateSurveyUser extends Command
      */
     public function handle()
     {
-
         $headers = ['Id', 'Email'];
 
         $users = User::all(['id', 'email'])->toArray();
@@ -55,14 +54,13 @@ class CreateSurveyUser extends Command
         $userId = $this->ask('Quel utilisateur?');
 
 
-
         $surveys = Survey::all(['id', 'name'])->toArray();
 
         $this->table($headers, $surveys);
 
         $surveyId = $this->ask('Quel sondage ?');
 
-        if($this->confirm("Êtes-vous sûr de vouloir attacher le user " . $userId . " au survey " .$surveyId . "?")){
+        if($this->confirm("Voulez-vous attacher le user " . $userId . " au survey " . $surveyId . "?")){
             $surveyUser = SurveyUser::create([
                 "user_id" => $userId,
                 "survey_id" => $surveyId
