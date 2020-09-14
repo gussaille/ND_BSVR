@@ -37,7 +37,7 @@ class QuestionStoreRequest extends FormRequest
     {
         $messages = [ 
             'answers.min' => 'Veuillez remplir tous les champs.', 
-            'answers.*.response.required' => 'doit être une chaine de caractère'
+            'answers.*.response.required' => 'Veuillez renseigner le champ'
         ];
         
         return $messages;

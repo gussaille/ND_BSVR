@@ -14,23 +14,29 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<input v-if="question.id === 1" type='email' :name="`answers[${index}]`" placeholder="Veuillez saisir votre adresse email" @change="checkEmail" v-model.lazy="userAnswer[index]" maxlength="255">
+						<input v-if="question.id === 1" type='email' placeholder="Veuillez saisir votre adresse email" @change="checkEmail" v-model.lazy="answers[index].response" maxlength="255">
 						
-						<small v-if="question.id === 1" :class="emailChecked[0] === true ? 'valid' : 'invalid'" class="email-message">{{ emailChecked[1] }}</small>
+						<small v-if="question.id === 1" :class="emailChecked !== true ? 'invalid' : 'valid'" class="email-message">
+							{{ emailChecked }}
+						</small>
 
-						<textarea v-else :disabled="emailChecked[0] !== true" :name="`answers[${index}]`" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						<textarea v-else :disabled="emailChecked !== true" placeholder="Veuillez saisir votre réponse" v-model="answers[index].response" maxlength="255"></textarea>
 
+						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
 					</div> 
 
 					<div v-else-if="question.type === 'A'">
-						<select :disabled="emailChecked[0] !== true" :name="`answers[${index}]`" id="selection" v-model="userAnswer[index]">
+						<select :disabled="emailChecked !== true" id="selection" v-model="answers[index].response">
 							<option value="" disabled> Veuillez choisir une réponse </option>
 							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
+
+						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
 					</div>
 
 					<div v-else>
-						<input :disabled="emailChecked[0] !== true" :name="`answers[${index}]`" type="number" min="1" max="5" v-model="userAnswer[index]">
+						<input :disabled="emailChecked !== true" type="number" min="1" max="5" v-model="answers[index].response">
+						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
 					</div>
 					
 				</div>
@@ -38,7 +44,6 @@
 			</div>
 
 			<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
-
 
 			<button type="submit" class="btn btn-primary">Finaliser</button>
 
@@ -66,45 +71,131 @@ export default {
 	data() {
 		return {
 			emailChecked: [],
-			questions: questions,
-			answers: [],
+			questions: [],
+			answers: [
+				{
+					response : '',
+					question_id : 1
+				},
+				{
+					response : '',
+					question_id : 2
+				},
+				{
+					response : '',
+					question_id : 3
+				},
+				{
+					response : '',
+					question_id : 4
+				},
+				{
+					response : '',
+					question_id : 5
+				},
+				{
+					response : '',
+					question_id : 6
+				},
+				{
+					response : '',
+					question_id : 7
+				},
+				{
+					response : '',
+					question_id : 8
+				},
+				{
+					response : '',
+					question_id : 9
+				},
+				{
+					response : '',
+					question_id : 10
+				},
+				{
+					response : '',
+					question_id : 11
+				},
+				{
+					response : '',
+					question_id : 12
+				},
+				{
+					response : '',
+					question_id : 13
+				},
+				{
+					response : '',
+					question_id : 14
+				},
+					{
+					response : '',
+					question_id : 15
+				},
+				{
+					response : '',
+					question_id : 16
+				},
+				{
+					response : '',
+					question_id : 17
+				},
+				{
+					response : '',
+					question_id : 18
+				},
+				{
+					response : '',
+					question_id : 19
+				},
+				{
+					response : '',
+					question_id : 20
+				},
+
+			],
 			errors: {},
-			userAnswer: [],
 			isSubmit: false,
 		}
 	},
 	mounted() {
-		
+		this.getQuestions();
 	},
 	methods: {
 		checkEmail(){
-			axios.post('/user/email', {'email': this.userAnswer[0]})
-			.then(res =>{
-				this.emailChecked = res.data;
+			axios.post('/user/email', {'email': this.answers[0].response})
+			.then(response =>{
+				this.emailChecked = response.data.check;
 			})
-			.catch(err=>{
+			.catch(err =>{
 				console.log(err);
 			})
 		},
+		getQuestions(){
+			let _this = this;
+			axios.get('/questions').then(response => {
+				_this.questions = response.data;	
+			}).catch(error => {
+				console.log(error);
+			})
+		},
     	submit() {
-			this.userAnswer.map((response, index) => 
-				this.answers.push({question_id: index+1, response: response})
-			);
-
-			if(this.emailChecked[0] === true && this.userAnswer[0].length >= 1){
-				axios.post('/submit', {answers : this.answers})
+			let _this = this;
+			if(this.emailChecked === true && this.answers[0].response.length >= 1){
+				axios.post('/answers', {answers: this.answers})
 				.then( res => {
 					console.log(res);
-					this.isSubmit = true;
+					_this.isSubmit = true;
 				})
 				.catch( err => {
 					let status = err.response.status;
 					let messages = err.response.data.errors;
-					this.errors = {};
-					this.userAnswer = [];
+					_this.errors = {};
+					console.log(_this.errors);
 
 					if (typeof (messages) === 'object') {
-						Object.keys(messages).forEach((index) => this.errors[index] = messages[index][0]);
+						Object.keys(messages).forEach((index) => _this.errors[index] = messages[index][0]);
 					} else {
 						alert('Une erreur est survenue (' + status + ')');
 					}
@@ -194,6 +285,9 @@ export default {
 				}
 
 				.email-message{
+					@media screen and (max-width: 800px){
+						display: block;
+					}
 					&.invalid{
 						color: red;
 					}

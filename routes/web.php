@@ -25,11 +25,12 @@ Route::prefix('administration')->middleware(['auth'])->group(function(){
 // Route::post('post-login', 'Auth\LoginController@postLogin'); 
 // // Route::get('/administration/dashboard', 'Auth\LoginController@dashboard'); 
 // Route::get('logout', 'Auth\LoginController@logout');
+Route::get('/questionnaire/{id}', 'SurveyController@index')->name('surveys.index');
+Route::get('/questions', 'SurveyController@getQuestions');
+
 
 Route::post('/user/email', 'SurveyController@checkEmail');
-
-Route::get('/', 'FrontController@index');
-Route::post('/submit', 'FrontController@store');
+Route::post('/answers', 'SurveyController@storeAnswers')->name('store.answers');
 
 
 // Auth::routes();

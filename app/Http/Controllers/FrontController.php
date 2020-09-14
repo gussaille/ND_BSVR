@@ -11,21 +11,5 @@ use App\User;
 
 class FrontController extends Controller
 {
-    public function index()
-    {
-        $questions = Question::all();
-
-        return view("front.home", ['questions'=> $questions]);
-
-    }
-
-    public function store(QuestionStoreRequest $request) 
-    {
-        foreach($request->answers as $answer){
-            Answer::create([
-                'response' => $answer['response'],
-                'question_id' => $answer['question_id'],
-            ]);
-        }
-    }
+ 
 }

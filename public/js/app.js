@@ -1971,56 +1971,124 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Survey',
   data: function data() {
     return {
       emailChecked: [],
-      questions: questions,
-      answers: [],
+      questions: [],
+      answers: [{
+        response: '',
+        question_id: 1
+      }, {
+        response: '',
+        question_id: 2
+      }, {
+        response: '',
+        question_id: 3
+      }, {
+        response: '',
+        question_id: 4
+      }, {
+        response: '',
+        question_id: 5
+      }, {
+        response: '',
+        question_id: 6
+      }, {
+        response: '',
+        question_id: 7
+      }, {
+        response: '',
+        question_id: 8
+      }, {
+        response: '',
+        question_id: 9
+      }, {
+        response: '',
+        question_id: 10
+      }, {
+        response: '',
+        question_id: 11
+      }, {
+        response: '',
+        question_id: 12
+      }, {
+        response: '',
+        question_id: 13
+      }, {
+        response: '',
+        question_id: 14
+      }, {
+        response: '',
+        question_id: 15
+      }, {
+        response: '',
+        question_id: 16
+      }, {
+        response: '',
+        question_id: 17
+      }, {
+        response: '',
+        question_id: 18
+      }, {
+        response: '',
+        question_id: 19
+      }, {
+        response: '',
+        question_id: 20
+      }],
       errors: {},
-      userAnswer: [],
       isSubmit: false
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.getQuestions();
+  },
   methods: {
     checkEmail: function checkEmail() {
-      var _this = this;
+      var _this2 = this;
 
       axios.post('/user/email', {
-        'email': this.userAnswer[0]
-      }).then(function (res) {
-        _this.emailChecked = res.data;
+        'email': this.answers[0].response
+      }).then(function (response) {
+        _this2.emailChecked = response.data.check;
       })["catch"](function (err) {
         console.log(err);
       });
     },
-    submit: function submit() {
-      var _this2 = this;
+    getQuestions: function getQuestions() {
+      var _this = this;
 
-      this.userAnswer.map(function (response, index) {
-        return _this2.answers.push({
-          question_id: index + 1,
-          response: response
-        });
+      axios.get('/questions').then(function (response) {
+        _this.questions = response.data;
+      })["catch"](function (error) {
+        console.log(error);
       });
+    },
+    submit: function submit() {
+      var _this = this;
 
-      if (this.emailChecked[0] === true && this.userAnswer[0].length >= 1) {
-        axios.post('/submit', {
+      if (this.emailChecked === true && this.answers[0].response.length >= 1) {
+        axios.post('/answers', {
           answers: this.answers
         }).then(function (res) {
           console.log(res);
-          _this2.isSubmit = true;
+          _this.isSubmit = true;
         })["catch"](function (err) {
           var status = err.response.status;
           var messages = err.response.data.errors;
-          _this2.errors = {};
-          _this2.userAnswer = [];
+          _this.errors = {};
+          console.log(_this.errors);
 
           if (_typeof(messages) === 'object') {
             Object.keys(messages).forEach(function (index) {
-              return _this2.errors[index] = messages[index][0];
+              return _this.errors[index] = messages[index][0];
             });
           } else {
             alert('Une erreur est survenue (' + status + ')');
@@ -6465,7 +6533,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  background-color: lightgrey;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885],\n.survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n  margin: 0 auto;\n  width: 300px;\n  display: block;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n    margin: 0;\n}\n}\n.survey__presentation p[data-v-52541885] {\n  margin-bottom: 5px;\n  font-size: 14px;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation p[data-v-52541885] {\n    font-size: 18px;\n}\n}\n.survey form[data-v-52541885] {\n  padding: 5px 0 20px;\n  box-sizing: border-box;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n  text-transform: uppercase;\n  font-size: 24px;\n}\n.survey .question[data-v-52541885] {\n  color: white;\n  box-sizing: border-box;\n  padding: 15px;\n  border-radius: 12px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: #343a40;\n  margin: 15px auto 30px;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey .question__answer input[type=email][data-v-52541885] {\n  width: 80%;\n  max-width: 300px;\n}\n.survey .question__answer .email-message.invalid[data-v-52541885] {\n  color: red;\n}\n.survey .question__answer .email-message.valid[data-v-52541885] {\n  color: #169116;\n}\n.survey .question__answer .disabled[data-v-52541885] {\n  pointer-events: none;\n  background-color: lightgrey;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 18px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #343a40;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n@media screen and (min-width: 800px) {\n.survey__confirmation[data-v-52541885] {\n    font-size: 26px;\n}\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
+exports.push([module.i, ".survey[data-v-52541885] {\n  width: 100%;\n  background-color: lightgrey;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885],\n.survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n  margin: 0 auto;\n  width: 300px;\n  display: block;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n    margin: 0;\n}\n}\n.survey__presentation p[data-v-52541885] {\n  margin-bottom: 5px;\n  font-size: 14px;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation p[data-v-52541885] {\n    font-size: 18px;\n}\n}\n.survey form[data-v-52541885] {\n  padding: 5px 0 20px;\n  box-sizing: border-box;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n  text-transform: uppercase;\n  font-size: 24px;\n}\n.survey .question[data-v-52541885] {\n  color: white;\n  box-sizing: border-box;\n  padding: 15px;\n  border-radius: 12px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: #343a40;\n  margin: 15px auto 30px;\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey .question__answer input[type=email][data-v-52541885] {\n  width: 80%;\n  max-width: 300px;\n}\n@media screen and (max-width: 800px) {\n.survey .question__answer .email-message[data-v-52541885] {\n    display: block;\n}\n}\n.survey .question__answer .email-message.invalid[data-v-52541885] {\n  color: red;\n}\n.survey .question__answer .email-message.valid[data-v-52541885] {\n  color: #169116;\n}\n.survey .question__answer .disabled[data-v-52541885] {\n  pointer-events: none;\n  background-color: lightgrey;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 18px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #343a40;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n@media screen and (min-width: 800px) {\n.survey__confirmation[data-v-52541885] {\n    font-size: 26px;\n}\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
 
 // exports
 
@@ -38303,25 +38371,24 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model.lazy",
-                                  value: _vm.userAnswer[index],
-                                  expression: "userAnswer[index]",
+                                  value: _vm.answers[index].response,
+                                  expression: "answers[index].response",
                                   modifiers: { lazy: true }
                                 }
                               ],
                               attrs: {
                                 type: "email",
-                                name: "answers[" + index + "]",
                                 placeholder:
                                   "Veuillez saisir votre adresse email",
                                 maxlength: "255"
                               },
-                              domProps: { value: _vm.userAnswer[index] },
+                              domProps: { value: _vm.answers[index].response },
                               on: {
                                 change: [
                                   function($event) {
                                     return _vm.$set(
-                                      _vm.userAnswer,
-                                      index,
+                                      _vm.answers[index],
+                                      "response",
                                       $event.target.value
                                     )
                                   },
@@ -38337,41 +38404,52 @@ var render = function() {
                               {
                                 staticClass: "email-message",
                                 class:
-                                  _vm.emailChecked[0] === true
-                                    ? "valid"
-                                    : "invalid"
+                                  _vm.emailChecked !== true
+                                    ? "invalid"
+                                    : "valid"
                               },
-                              [_vm._v(_vm._s(_vm.emailChecked[1]))]
+                              [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t" +
+                                    _vm._s(_vm.emailChecked) +
+                                    "\n\t\t\t\t\t\t"
+                                )
+                              ]
                             )
                           : _c("textarea", {
                               directives: [
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.userAnswer[index],
-                                  expression: "userAnswer[index]"
+                                  value: _vm.answers[index].response,
+                                  expression: "answers[index].response"
                                 }
                               ],
                               attrs: {
-                                disabled: _vm.emailChecked[0] !== true,
-                                name: "answers[" + index + "]",
+                                disabled: _vm.emailChecked !== true,
                                 placeholder: "Veuillez saisir votre réponse",
                                 maxlength: "255"
                               },
-                              domProps: { value: _vm.userAnswer[index] },
+                              domProps: { value: _vm.answers[index].response },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return
                                   }
                                   _vm.$set(
-                                    _vm.userAnswer,
-                                    index,
+                                    _vm.answers[index],
+                                    "response",
                                     $event.target.value
                                   )
                                 }
                               }
-                            })
+                            }),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "errors" }, [
+                          _vm._v(
+                            _vm._s(_vm.errors["answers." + index + ".response"])
+                          )
+                        ])
                       ])
                     : question.type === "A"
                     ? _c("div", [
@@ -38382,13 +38460,12 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.userAnswer[index],
-                                expression: "userAnswer[index]"
+                                value: _vm.answers[index].response,
+                                expression: "answers[index].response"
                               }
                             ],
                             attrs: {
-                              disabled: _vm.emailChecked[0] !== true,
-                              name: "answers[" + index + "]",
+                              disabled: _vm.emailChecked !== true,
                               id: "selection"
                             },
                             on: {
@@ -38402,8 +38479,8 @@ var render = function() {
                                     return val
                                   })
                                 _vm.$set(
-                                  _vm.userAnswer,
-                                  index,
+                                  _vm.answers[index],
+                                  "response",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -38427,7 +38504,13 @@ var render = function() {
                             })
                           ],
                           2
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "errors" }, [
+                          _vm._v(
+                            _vm._s(_vm.errors["answers." + index + ".response"])
+                          )
+                        ])
                       ])
                     : _c("div", [
                         _c("input", {
@@ -38435,31 +38518,36 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.userAnswer[index],
-                              expression: "userAnswer[index]"
+                              value: _vm.answers[index].response,
+                              expression: "answers[index].response"
                             }
                           ],
                           attrs: {
-                            disabled: _vm.emailChecked[0] !== true,
-                            name: "answers[" + index + "]",
+                            disabled: _vm.emailChecked !== true,
                             type: "number",
                             min: "1",
                             max: "5"
                           },
-                          domProps: { value: _vm.userAnswer[index] },
+                          domProps: { value: _vm.answers[index].response },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                _vm.userAnswer,
-                                index,
+                                _vm.answers[index],
+                                "response",
                                 $event.target.value
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "errors" }, [
+                          _vm._v(
+                            _vm._s(_vm.errors["answers." + index + ".response"])
+                          )
+                        ])
                       ])
                 ])
               ])
