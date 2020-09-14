@@ -14,23 +14,23 @@
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
-						<input v-if="question.id === 1" type='email' :name="`answers[${index}]`" placeholder="Veuillez saisir votre adresse email" @blur="checkEmail" v-model="userAnswer[index]" maxlength="255">
+						<input v-if="question.id === 1" type='email' :name="`answers[${index}]`" placeholder="Veuillez saisir votre adresse email" @change="checkEmail" v-model.lazy="userAnswer[index]" maxlength="255">
 						
 						<small v-if="question.id === 1" :class="emailChecked[0] === true ? 'valid' : 'invalid'" class="email-message">{{ emailChecked[1] }}</small>
 
-						<textarea v-else :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="`answers[${index}]`" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
+						<textarea v-else :disabled="emailChecked[0] !== true" :name="`answers[${index}]`" placeholder="Veuillez saisir votre réponse" v-model="userAnswer[index]" maxlength="255"></textarea>
 
 					</div> 
 
 					<div v-else-if="question.type === 'A'">
-						<select :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="`answers[${index}]`" id="selection" v-model="userAnswer[index]">
+						<select :disabled="emailChecked[0] !== true" :name="`answers[${index}]`" id="selection" v-model="userAnswer[index]">
 							<option value="" disabled> Veuillez choisir une réponse </option>
 							<option v-for="(item, num) in question.options" :key="num" :value="item" >{{item}}</option>
 						</select>
 					</div>
 
 					<div v-else>
-						<input :class="emailChecked[0] !== true ? 'disabled' : 'check'" :name="`answers[${index}]`" type="number" min="1" max="5" v-model="userAnswer[index]">
+						<input :disabled="emailChecked[0] !== true" :name="`answers[${index}]`" type="number" min="1" max="5" v-model="userAnswer[index]">
 					</div>
 					
 				</div>
@@ -91,23 +91,25 @@ export default {
 				this.answers.push({question_id: index+1, response: response})
 			);
 
-			axios.post('/submit', {answers : this.answers})
-			.then( res => {
-				console.log(res);
-				// this.isSubmit = true;
-			})
-			.catch( err => {
-				let status = err.response.status;
-				let messages = err.response.data.errors;
-				this.errors = {};
-				this.userAnswer = [];
+			if(this.emailChecked[0] === true && this.userAnswer[0].length >= 1){
+				axios.post('/submit', {answers : this.answers})
+				.then( res => {
+					console.log(res);
+					// this.isSubmit = true;
+				})
+				.catch( err => {
+					let status = err.response.status;
+					let messages = err.response.data.errors;
+					this.errors = {};
+					this.userAnswer = [];
 
-				if (typeof (messages) === 'object') {
-					Object.keys(messages).forEach((index) => this.errors[index] = messages[index][0]);
-				} else {
-					alert('Une erreur est survenue (' + status + ')');
-				}
-			});
+					if (typeof (messages) === 'object') {
+						Object.keys(messages).forEach((index) => this.errors[index] = messages[index][0]);
+					} else {
+						alert('Une erreur est survenue (' + status + ')');
+					}
+				});
+			}
 		},
     }
 }

@@ -2005,24 +2005,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           response: response
         });
       });
-      axios.post('/submit', {
-        answers: this.answers
-      }).then(function (res) {
-        console.log(res); // this.isSubmit = true;
-      })["catch"](function (err) {
-        var status = err.response.status;
-        var messages = err.response.data.errors;
-        _this2.errors = {};
-        _this2.userAnswer = [];
 
-        if (_typeof(messages) === 'object') {
-          Object.keys(messages).forEach(function (index) {
-            return _this2.errors[index] = messages[index][0];
-          });
-        } else {
-          alert('Une erreur est survenue (' + status + ')');
-        }
-      });
+      if (this.emailChecked[0] === true && this.userAnswer[0].length >= 1) {
+        axios.post('/submit', {
+          answers: this.answers
+        }).then(function (res) {
+          console.log(res); // this.isSubmit = true;
+        })["catch"](function (err) {
+          var status = err.response.status;
+          var messages = err.response.data.errors;
+          _this2.errors = {};
+          _this2.userAnswer = [];
+
+          if (_typeof(messages) === 'object') {
+            Object.keys(messages).forEach(function (index) {
+              return _this2.errors[index] = messages[index][0];
+            });
+          } else {
+            alert('Une erreur est survenue (' + status + ')');
+          }
+        });
+      }
     }
   }
 });
@@ -38298,9 +38301,10 @@ var render = function() {
                               directives: [
                                 {
                                   name: "model",
-                                  rawName: "v-model",
+                                  rawName: "v-model.lazy",
                                   value: _vm.userAnswer[index],
-                                  expression: "userAnswer[index]"
+                                  expression: "userAnswer[index]",
+                                  modifiers: { lazy: true }
                                 }
                               ],
                               attrs: {
@@ -38312,17 +38316,16 @@ var render = function() {
                               },
                               domProps: { value: _vm.userAnswer[index] },
                               on: {
-                                blur: _vm.checkEmail,
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.userAnswer,
-                                    index,
-                                    $event.target.value
-                                  )
-                                }
+                                change: [
+                                  function($event) {
+                                    return _vm.$set(
+                                      _vm.userAnswer,
+                                      index,
+                                      $event.target.value
+                                    )
+                                  },
+                                  _vm.checkEmail
+                                ]
                               }
                             })
                           : _vm._e(),
@@ -38348,11 +38351,8 @@ var render = function() {
                                   expression: "userAnswer[index]"
                                 }
                               ],
-                              class:
-                                _vm.emailChecked[0] !== true
-                                  ? "disabled"
-                                  : "check",
                               attrs: {
+                                disabled: _vm.emailChecked[0] !== true,
                                 name: "answers[" + index + "]",
                                 placeholder: "Veuillez saisir votre réponse",
                                 maxlength: "255"
@@ -38385,11 +38385,8 @@ var render = function() {
                                 expression: "userAnswer[index]"
                               }
                             ],
-                            class:
-                              _vm.emailChecked[0] !== true
-                                ? "disabled"
-                                : "check",
                             attrs: {
+                              disabled: _vm.emailChecked[0] !== true,
                               name: "answers[" + index + "]",
                               id: "selection"
                             },
@@ -38441,9 +38438,8 @@ var render = function() {
                               expression: "userAnswer[index]"
                             }
                           ],
-                          class:
-                            _vm.emailChecked[0] !== true ? "disabled" : "check",
                           attrs: {
+                            disabled: _vm.emailChecked[0] !== true,
                             name: "answers[" + index + "]",
                             type: "number",
                             min: "1",
