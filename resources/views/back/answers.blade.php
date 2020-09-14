@@ -12,27 +12,30 @@
 
           <h1 class="text-center">Réponses des sondés</h1>
 
-
             {{-- Rajouter loop = Tableau pour chaque questionnaire d'utilisateur -> foreach --}}
 
+              @forelse($surveyUsers as $surveyUser)
 
-            {{-- @foreach($surveyUser as $answer) --}}
+                <table class="table table-striped answer-table mb-3">
 
-              <table class="table table-striped answer-table">
-                @foreach ($questions as $question)
+                  @foreach ($questions as $question)
 
-                  <tbody>
-                    <tr>
-                      <th scope="row">{{ $question->id }}</th>
-                      <td>{{ $question->label }}</td>
-                      <td> Réponse </td>
-                    </tr>
-                  </tbody>
+                    <tbody>
+                      <tr>
+                        <th scope="row">{{$question->id}}</th>
+                        <td>{{$question->label}}</td></td>
+                        <td>Réponse</td>
+                      </tr>
+                    </tbody>
 
-                  @endforeach
-              </table>
+                    @endforeach
+                </table>
 
-            {{-- @endforeach --}}
+              @empty
+
+                <p class="text-center">Il n'y pas de réponses pour le moment.</p>
+
+              @endforelse
 
       </div>
     </div>

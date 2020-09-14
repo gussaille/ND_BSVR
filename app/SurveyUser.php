@@ -9,7 +9,7 @@ class SurveyUser extends Model
     protected $table = 'survey_user';
 
     protected $fillable = [
-        'access_key', 'user_id', 'survey_id'
+        'user_id', 'survey_id'
     ];
 
     public function user()

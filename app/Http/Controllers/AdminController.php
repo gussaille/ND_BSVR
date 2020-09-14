@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\User;
+use App\SurveyUser;
 use App\Answer;
 
 class AdminController extends Controller
@@ -17,18 +18,18 @@ class AdminController extends Controller
         return view('back.charts',['Headset' => $headset, 'Data' => $data]);
     }
 
-    public function questions()
+    public function showQuestions()
     {
         $questions = Question::all();
-
         return view("back.survey", ['questions'=> $questions]);
     }
 
-    public function answers()
+    public function showAnswers()
     {
-        $questions = Question::all();
-        $answers = Answer::all();
-        return view('back.answers', ['answers' => $answers, 'questions' => $questions]);
+        $surveyUsers = SurveyUser::pluck('id');
 
+        $questions = Question::all();
+
+        return view('back.answers', ['surveyUsers' => $surveyUsers, 'questions'=> $questions]);
     }
 }

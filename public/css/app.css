@@ -302,7 +302,7 @@ q:after {
 }
 
 .answer-table {
-  height: 400px;
+  height: 400px !important;
   overflow-y: scroll;
 }
 

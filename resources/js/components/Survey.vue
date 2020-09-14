@@ -38,9 +38,7 @@
 						<input :disabled="emailChecked !== true" type="number" min="1" max="5" v-model="answers[index].response">
 						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
 					</div>
-					
 				</div>
-
 			</div>
 
 			<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>

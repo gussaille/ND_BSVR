@@ -62,10 +62,8 @@ class CreateSurveyUser extends Command
 
         $surveyId = $this->ask('Quel sondage ?');
 
-
         if($this->confirm("Êtes-vous sûr de vouloir attacher le user " . $userId . " au survey " .$surveyId . "?")){
             $surveyUser = SurveyUser::create([
-                "access_key" => (string) Str::uuid(),
                 "user_id" => $userId,
                 "survey_id" => $surveyId
             ]);
