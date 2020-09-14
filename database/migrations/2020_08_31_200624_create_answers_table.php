@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->string('response')->nullable();
             $table->foreignId('question_id')->constrained();
-            $table->foreignId('survey_user_id')->nullable()->constrained();
+            $table->foreignId('survey_user_id')->nullable()->constrained('survey_users');
             $table->timestamps();
         });
     }

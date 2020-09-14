@@ -95,7 +95,7 @@ export default {
 				axios.post('/submit', {answers : this.answers})
 				.then( res => {
 					console.log(res);
-					// this.isSubmit = true;
+					this.isSubmit = true;
 				})
 				.catch( err => {
 					let status = err.response.status;
@@ -211,7 +211,7 @@ export default {
 		&__confirmation {
 			-webkit-animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;
 	        animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;	
-			font-size: 26px;
+			font-size: 18px;
 			width: 90%;
 			max-width: 680px;
 			box-shadow: 1px 2px 10px lightgrey;
@@ -223,6 +223,10 @@ export default {
 			color: white;
 			box-sizing: border-box;
 			padding: 20px;
+
+			@media screen and (min-width: 800px){
+				font-size: 26px;
+			}
 
 			&__logo {
 				width: 300px;
