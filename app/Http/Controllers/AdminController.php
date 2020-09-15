@@ -19,11 +19,18 @@ class AdminController extends Controller
         foreach($question6 as $choice){
             $choice6 = $choice->options;
         }
+
         foreach($question7 as $choice){
             $choice7 = $choice->options;
         }
+
         foreach($question10 as $choice){
             $choice10 = $choice->options;
+        }
+
+        $answers = Answer::all();
+        $answers6 = $answers->where('question_id', 6);
+        foreach($answers6 as $answer6){
         }
         
         return view('back.charts', [

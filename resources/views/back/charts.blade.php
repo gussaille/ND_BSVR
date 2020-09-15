@@ -62,7 +62,7 @@
     var secondChart = new Chart(ctx2, {
       type: 'pie',
       data: {
-        labels:  <?php echo json_encode($choice6); ?>,
+        labels:  <?php echo json_encode($choice7); ?>,
         datasets: [{
           backgroundColor: [
             "#CC0000",

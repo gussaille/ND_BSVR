@@ -205,7 +205,18 @@ export default {
 <style lang="scss" scoped>
 
 	.survey{
+	   -webkit-animation-name: fadeIn;
+           animation-name: fadeIn;
+		-webkit-animation-duration: 0.6s;
+		        animation-duration: 0.6s;
+		-webkit-animation-delay: 0.5s;
+		        animation-delay: 0.5s;
+		-webkit-animation-fill-mode: forwards;
+		        animation-fill-mode: forwards;
+		-webkit-animation-timing-function: ease-in;
+		        animation-timing-function: ease-in;
 		width: 100%;
+		opacity: 0;
 		background-color: #0B132B;
 		margin: 0 auto;
 		

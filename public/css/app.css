@@ -326,9 +326,15 @@ q:after {
 
 .summary-container .summary__description__text {
   color: white;
-  font-size: 22px;
-  line-height: 1;
+  font-size: 18px;
+  line-height: 1.2;
   text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+  .summary-container .summary__description__text {
+    font-size: 22px;
+  }
 }
 
 .summary-container .summary__answers {
