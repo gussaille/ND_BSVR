@@ -12,10 +12,25 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $headset = array('Occulus Rift/s', 'HTC Vive', 'Windows Mixed Reality', 'PSVR');
-        $data  = array(15, 10, 3, 43);
+        $question6 = Question::all()->where('id', 6);
+        $question7 = Question::all()->where('id', 7);
+        $question10 = Question::all()->where('id', 10);
+
+        foreach($question6 as $choice){
+            $choice6 = $choice->options;
+        }
+        foreach($question7 as $choice){
+            $choice7 = $choice->options;
+        }
+        foreach($question10 as $choice){
+            $choice10 = $choice->options;
+        }
         
-        return view('back.charts',['Headset' => $headset, 'Data' => $data]);
+        return view('back.charts', [
+            'choice6' => $choice6, 
+            'choice7' => $choice7, 
+            'choice10' => $choice10 
+        ]);
     }
 
     public function showQuestions()

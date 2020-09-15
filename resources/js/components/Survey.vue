@@ -8,17 +8,18 @@
 		<form @submit.prevent="submit" v-if="!isSubmit">
 
 			<div v-for="(question, index) in questions" class="question" :key="index">
-				<h1>Question {{question.id}}/20</h1>
-				<h2>{{question.label}}</h2>
+				<p class="question__number">Question {{question.id}}/20</p>
+				<p class="question__label">{{question.label}}</p>
 
 				<div class="question__answer">
 
 					<div v-if="question.type === 'B'">
 						<input v-if="question.id === 1" type='email' placeholder="Veuillez saisir votre adresse email" @change="checkEmail" v-model.lazy="answers[index].response" maxlength="255">
 						
-						<small v-if="question.id === 1" :class="emailChecked !== true ? 'invalid' : 'valid'" class="email-message">
-							{{ emailChecked }}
-						</small>
+						<div v-if="question.id === 1" :class="emailChecked !== true ? 'invalid' : 'valid'" class="email-message">
+							<span v-if="emailChecked.length !== 0 && emailChecked === true">Email valide</span>
+							<span v-else-if="emailChecked.length !== 0 && emailChecked !== true">Email inconnu</span>
+						</div>
 
 						<textarea v-else :disabled="emailChecked !== true" placeholder="Veuillez saisir votre réponse" v-model="answers[index].response" maxlength="255"></textarea>
 
@@ -167,7 +168,7 @@ export default {
 				this.emailChecked = response.data.check;
 			})
 			.catch(err =>{
-				console.log(err);
+				alert('Une erreur est survenue (' + error.response.status + ')');
 			})
 		},
 		getQuestions(){
@@ -175,7 +176,7 @@ export default {
 			axios.get('/questions').then(response => {
 				_this.questions = response.data;	
 			}).catch(error => {
-				console.log(error);
+				alert('Une erreur est survenue (' + error.response.status + ')');
 			})
 		},
     	submit() {
@@ -183,14 +184,12 @@ export default {
 			if(this.emailChecked === true && this.answers[0].response.length >= 1){
 				axios.post('/answers', {answers: this.answers})
 				.then( res => {
-					console.log(res);
 					_this.isSubmit = true;
 				})
 				.catch( err => {
 					let status = err.response.status;
 					let messages = err.response.data.errors;
 					_this.errors = {};
-					console.log(_this.errors);
 
 					if (typeof (messages) === 'object') {
 						Object.keys(messages).forEach((index) => _this.errors[index] = messages[index][0]);
@@ -207,7 +206,7 @@ export default {
 
 	.survey{
 		width: 100%;
-		background-color: lightgrey;
+		background-color: #0B132B;
 		margin: 0 auto;
 		
 		&__presentation, 
@@ -231,6 +230,7 @@ export default {
 			p{
 				margin-bottom: 5px;
 				font-size: 14px;
+				color: white;
 
 				@media screen and(min-width: 800px){
 					font-size: 18px;
@@ -253,15 +253,19 @@ export default {
 
 		
 		.question {
-			color: white;
+			color:  #1C2541;
 			box-sizing: border-box;
 			padding: 15px;
-			border-radius: 12px;
+			border-radius: 2px;
 			width: 100%;
 			margin: 0 auto;
 			max-width: 800px;
-			background-color: #343a40;
+			background-color:  white;
 			margin: 15px auto 30px;
+
+			@media screen and (min-width: 800px){
+				padding: 15px 30px;
+			}
 
 			&__answer {
 				
@@ -299,6 +303,15 @@ export default {
 					background-color: lightgrey;
 				}
 			}
+			&__number{
+				margin-bottom: 0;
+				font-size: 40px;
+			}
+			&__label {
+				margin-bottom: 16px;;
+				font-size: 26px;
+				line-height: 1.2;
+			}
 		}
 		&__confirmation {
 			-webkit-animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;
@@ -311,7 +324,7 @@ export default {
 			top: 20%;
 			left: 50%;
 			transform: translateX(-50%);
-			background-color: #343a40;
+			background-color: #0B132B;
 			color: white;
 			box-sizing: border-box;
 			padding: 20px;

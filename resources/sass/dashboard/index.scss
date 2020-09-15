@@ -12,9 +12,9 @@
 
 .panel{
     padding-top: 10vh;
-    width: 350px;
+    width: 420px;
     height: 100vh;
-    background-color: rgba(54, 155, 192, 0.9);
+    background-color: $darkblue;
     flex-grow: 1;
 
 
@@ -22,7 +22,7 @@
         li a{
             font-size: 24px;
             font-weight: bold;
-            color: black;
+            color: white;
         }
     }
 }

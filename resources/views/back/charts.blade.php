@@ -33,7 +33,7 @@
     var firstChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: <?php echo json_encode($Headset); ?>,
+      labels: <?php echo json_encode($choice6); ?>,
       // labels: month,
       datasets: [
         {
@@ -45,7 +45,7 @@
             "orange",
           ],
           borderWidth: 1,
-          data: <?php echo json_encode($Data); ?>
+          data: [16, 16, 19, 2]
         }
       ]
     },
@@ -62,7 +62,7 @@
     var secondChart = new Chart(ctx2, {
       type: 'pie',
       data: {
-        labels: ["SteamVR", "Occulus store", "Viveport", "Playstation VR", "GooglePlay", "Windows store"],
+        labels:  <?php echo json_encode($choice6); ?>,
         datasets: [{
           backgroundColor: [
             "#CC0000",
@@ -89,7 +89,7 @@
     var thirdChart = new Chart(ctx3, {
       type: 'pie',
       data: {
-        labels: ["regarder des émissions TV en direct", "regarder des films", "jouer en solo", "jouer en team"],
+        labels:  <?php echo json_encode($choice10); ?>,
         datasets: [{
           backgroundColor: [
             "yellow",
