@@ -306,6 +306,64 @@ q:after {
   overflow-y: scroll;
 }
 
+.summary-container {
+  background-color: #1C2541;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.summary-container .summary {
+  width: 90%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.summary-container .summary__description {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.summary-container .summary__description__text {
+  color: white;
+  font-size: 22px;
+  line-height: 1;
+  text-align: center;
+}
+
+.summary-container .summary__answers {
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.summary-container .summary__answers .answer {
+  width: 90%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 2px solid #1C2541;
+  color: #1C2541;
+}
+
+.summary-container .summary__answers .answer__number {
+  font-size: 32px;
+}
+
+@media screen and (min-width: 800px) {
+  .summary-container .summary__answers .answer__number {
+    font-size: 40px;
+  }
+}
+
+.summary-container .summary__answers .answer__user {
+  box-sizing: border-box;
+  font-size: 20px;
+  padding: 16px;
+  word-break: break-all;
+  border: dotted black;
+}
+
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

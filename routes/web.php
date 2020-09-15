@@ -21,7 +21,11 @@ Route::prefix('administration')->middleware(['auth'])->group(function(){
     Route::get('/answers', 'AdminController@showAnswers')->name('admin.answers');
 });
 
+Route::get('/recapitulatif', 'SummaryController@index')->name('show.answers');
+
+
 Route::get('/questionnaire/{id}', 'SurveyController@index')->name('surveys.index');
 Route::get('/questions', 'SurveyController@getQuestions');
 Route::post('/user/email', 'SurveyController@checkEmail');
 Route::post('/answers', 'SurveyController@storeAnswers')->name('store.answers');
+
