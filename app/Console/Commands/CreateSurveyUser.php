@@ -51,7 +51,7 @@ class CreateSurveyUser extends Command
 
         $headers = ['Id', 'Name'];
 
-        $userId = $this->ask('Quel utilisateur?');
+        $userId = $this->ask('Quel utilisateur ?');
 
 
         $surveys = Survey::all(['id', 'name'])->toArray();

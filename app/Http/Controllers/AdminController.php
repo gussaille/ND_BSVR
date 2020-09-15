@@ -27,13 +27,6 @@ class AdminController extends Controller
     public function showAnswers()
     {
         $surveyUsers = SurveyUser::all();
-
-        foreach($surveyUsers as $surveyUser){
-            foreach($surveyUser->answers as $answer){
-                $userAnswer = $answer->response;
-            };
-        }
-
         $questions = Question::all();
 
         return view('back.answers', ['surveyUsers' => $surveyUsers, 'questions'=> $questions]);
