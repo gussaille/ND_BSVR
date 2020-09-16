@@ -58,9 +58,9 @@ class CreateSurveyUser extends Command
 
         $this->table($headers, $surveys);
 
-        $surveyId = $this->ask('Quel sondage ?');
+        $surveyId = $this->ask('Quel questionnaire ?');
 
-        if($this->confirm("Voulez-vous attacher le user " . $userId . " au survey " . $surveyId . "?")){
+        if($this->confirm("Voulez-vous attacher le user " . $userId . " au questionnaire " . $surveyId . "?")){
             $surveyUser = SurveyUser::create([
                 "user_id" => $userId,
                 "survey_id" => $surveyId

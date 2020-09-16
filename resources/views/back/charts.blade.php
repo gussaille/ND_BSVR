@@ -34,7 +34,6 @@
     type: 'pie',
     data: {
       labels: <?php echo json_encode($choice6); ?>,
-      // labels: month,
       datasets: [
         {
           label: 'this year',
@@ -62,7 +61,7 @@
     var secondChart = new Chart(ctx2, {
       type: 'pie',
       data: {
-        labels:  <?php echo json_encode($choice7); ?>,
+        labels: <?php echo json_encode($choice7); ?>,
         datasets: [{
           backgroundColor: [
             "#CC0000",
@@ -89,7 +88,7 @@
     var thirdChart = new Chart(ctx3, {
       type: 'pie',
       data: {
-        labels:  <?php echo json_encode($choice10); ?>,
+        labels:<?php echo json_encode($choice10); ?>,
         datasets: [{
           backgroundColor: [
             "yellow",

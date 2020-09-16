@@ -31,6 +31,7 @@ class AdminController extends Controller
         $answers = Answer::all();
         $answers6 = $answers->where('question_id', 6);
         foreach($answers6 as $answer6){
+            // dump($answer6);
         }
         
         return view('back.charts', [

@@ -168,15 +168,15 @@ export default {
 				this.emailChecked = response.data.check;
 			})
 			.catch(err =>{
-				alert('Une erreur est survenue (' + error.response.status + ')');
+				alert('Une erreur est survenue (' + err.response.status + ')');
 			})
 		},
 		getQuestions(){
 			let _this = this;
 			axios.get('/questions').then(response => {
 				_this.questions = response.data;	
-			}).catch(error => {
-				alert('Une erreur est survenue (' + error.response.status + ')');
+			}).catch(err=> {
+				alert('Une erreur est survenue (' + err.response.status + ')');
 			})
 		},
     	submit() {

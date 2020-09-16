@@ -2058,7 +2058,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }).then(function (response) {
         _this2.emailChecked = response.data.check;
       })["catch"](function (err) {
-        alert('Une erreur est survenue (' + error.response.status + ')');
+        alert('Une erreur est survenue (' + err.response.status + ')');
       });
     },
     getQuestions: function getQuestions() {
@@ -2066,8 +2066,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       axios.get('/questions').then(function (response) {
         _this.questions = response.data;
-      })["catch"](function (error) {
-        alert('Une erreur est survenue (' + error.response.status + ')');
+      })["catch"](function (err) {
+        alert('Une erreur est survenue (' + err.response.status + ')');
       });
     },
     submit: function submit() {
