@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// Route with prefix administration for the admin dashboard
 Route::prefix('administration')->middleware(['auth'])->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('/survey', 'AdminController@showQuestions')->name('admin.questions');
@@ -22,7 +23,6 @@ Route::prefix('administration')->middleware(['auth'])->group(function(){
 });
 
 Route::get('/recapitulatif', 'SummaryController@index')->name('show.answers');
-
 
 Route::get('/questionnaire/{id}', 'SurveyController@index')->name('surveys.index');
 Route::get('/questions', 'SurveyController@getQuestions');

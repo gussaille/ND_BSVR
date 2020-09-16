@@ -70,7 +70,6 @@
             "orange",
             "purple",
             "lemon"
-
           ],
           data: [17, 20, 38, 2, 26, 12]
         }]
@@ -134,6 +133,7 @@
     });
     
 </script>
+
 @endsection
 
 

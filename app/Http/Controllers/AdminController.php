@@ -44,14 +44,13 @@ class AdminController extends Controller
     public function showQuestions()
     {
         $questions = Question::all();
-        return view("back.survey", ['questions'=> $questions]);
+        return view("back.survey", ['questions'=> $questions]); // return all the questions of the survey in the view back.survey
     }
 
     public function showAnswers()
     {
         $surveyUsers = SurveyUser::all();
-        $questions = Question::all();
 
-        return view('back.answers', ['surveyUsers' => $surveyUsers, 'questions'=> $questions]);
+        return view('back.answers', ['surveyUsers' => $surveyUsers]); // return all the questions and surveyUsers in the view back.answers
     }
 }

@@ -11,8 +11,9 @@ class Question extends Model
         'options' => 'array',
     ];
 
-    public function answers(){
-
+    // A Question has many answers
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
     }
 }

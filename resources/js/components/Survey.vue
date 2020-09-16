@@ -5,6 +5,7 @@
 			<p>Merci de répondre à toutes les questions et de valider le formulaire en bas de page.</p>
 		</div>
 		
+		<!-- Survey Form -->
 		<form @submit.prevent="submit" v-if="!isSubmit">
 
 			<div v-for="(question, index) in questions" class="question" :key="index">
@@ -12,10 +13,13 @@
 				<p class="question__label">{{question.label}}</p>
 
 				<div class="question__answer">
-
+					<!-- Conditional rendering on inputs according to their question's type -->
 					<div v-if="question.type === 'B'">
+						<!-- If email is not the one, the checkEmail methods will return an error 'Email Inconnu' with the change event -->
+						<!-- If the email is not valid, others input are disabled and form couldn't be send until the email is valid-->
 						<input v-if="question.id === 1" type='email' placeholder="Veuillez saisir votre adresse email" @change="checkEmail" v-model.lazy="answers[index].response" maxlength="255">
 						
+						<!-- Conditional rendering of error messages of the email field -->
 						<div v-if="question.id === 1" :class="emailChecked !== true ? 'invalid' : 'valid'" class="email-message">
 							<span v-if="emailChecked.length !== 0 && emailChecked === true">Email valide</span>
 							<span v-else-if="emailChecked.length !== 0 && emailChecked !== true">Email inconnu</span>
@@ -26,6 +30,7 @@
 						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
 					</div> 
 
+					<!-- Condition rendering on inputs according to their question's type -->
 					<div v-else-if="question.type === 'A'">
 						<select :disabled="emailChecked !== true" id="selection" v-model="answers[index].response">
 							<option value="" disabled> Veuillez choisir une réponse </option>
@@ -35,6 +40,7 @@
 						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
 					</div>
 
+					<!-- Condition rendering on inputs according to their question's type -->
 					<div v-else>
 						<input :disabled="emailChecked !== true" type="number" min="1" max="5" v-model="answers[index].response">
 						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
@@ -45,19 +51,17 @@
 			<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 
 			<button type="submit" class="btn btn-primary">Finaliser</button>
-
 		</form>
-		<div class="survey__confirmation" v-if="isSubmit">
 
+		<!-- Confirmations message appear if survey has been successfuly sent -->
+		<div class="survey__confirmation" v-if="isSubmit">
 			<img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="survey__confirmation__logo">
 
 			<p>Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
 				votre investissement, nous vous préparons une application toujours plus
 				facile à utiliser, seul ou en famille.
 				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-				cette adresse: http://xxxxxxxx
-
-				<!-- url dynamique selon l'user --> 
+				cette adresse: http://xxxxxxxx  <!-- url dynamique selon l'user --> 
 			</p>
 		</div>
     </div>
@@ -159,9 +163,12 @@ export default {
 		}
 	},
 	mounted() {
+		// we have access to this method after DOM is mounted
 		this.getQuestions();
 	},
 	methods: {
+
+		// methods to send an email from server with axios (ajax) and check by server if email is the one
 		checkEmail(){
 			axios.post('/user/email', {'email': this.answers[0].response})
 			.then(response =>{
@@ -171,6 +178,8 @@ export default {
 				alert('Une erreur est survenue (' + err.response.status + ')');
 			})
 		},
+
+		// methods to retrieve data questions from api with axios (ajax)
 		getQuestions(){
 			let _this = this;
 			axios.get('/questions').then(response => {
@@ -179,6 +188,8 @@ export default {
 				alert('Une erreur est survenue (' + err.response.status + ')');
 			})
 		},
+
+		// methods submit to send survey form to Database
     	submit() {
 			let _this = this;
 			if(this.emailChecked === true && this.answers[0].response.length >= 1){
@@ -202,6 +213,8 @@ export default {
     }
 }
 </script>
+
+<!--Style of the component Survey -->
 <style lang="scss" scoped>
 
 	.survey{
@@ -209,8 +222,8 @@ export default {
            animation-name: fadeIn;
 		-webkit-animation-duration: 0.6s;
 		        animation-duration: 0.6s;
-		-webkit-animation-delay: 0.5s;
-		        animation-delay: 0.5s;
+		-webkit-animation-delay: 0.8s;
+		        animation-delay: 0.8s;
 		-webkit-animation-fill-mode: forwards;
 		        animation-fill-mode: forwards;
 		-webkit-animation-timing-function: ease-in;

@@ -13,11 +13,12 @@ class QuestionTableSeeder extends Seeder
      */
     public function run()
     {
-
+        // Generates one survey with 'name' key
         $survey = Survey::create([
             'name' => 'Aidez-nous à améliorer notre app'
         ]);
 
+        // Generates questions of the survey
         $survey->questions()->createMany([
             [
                 'label' => 'Votre adresse mail ?', 

@@ -12,6 +12,7 @@ class AccountTableSeeder extends Seeder
      */
     public function run()
     {
+        // Generates the admin account
         Account::create([
             'name' => 'Nico',
             'email' => 'ndurocher@mail.com',

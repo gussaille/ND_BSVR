@@ -15,17 +15,19 @@
               @forelse($surveyUsers as $surveyUser)
 
                 <table class="table table-striped answer-table mb-3">
-                  
+                  @foreach ($questions as $question)
+
                   @foreach ($surveyUser->answers as $answer)
 
                     <tbody>
                       <tr>
                         <th scope="row">{{$answer->question_id}}</th>
-                        <td>{{$answer->question_id}}</td></td>
+                        <td>{{$question->label}}</td>
                         <td>{{$answer->response}}</td>
                       </tr>
                     </tbody>
 
+                    @endforeach
                     @endforeach
 
                 </table>

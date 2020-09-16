@@ -16,16 +16,20 @@ class SurveyController extends Controller
     protected function getSurveyUser(): SurveyUser
     {
         $surveyUser = session()->get('surveyUser');
+
         if(!$surveyUser || !($surveyUser instanceof SurveyUser)){
             abort(404);
         }
+
         return $surveyUser;
     }
 
     public function index($surveyUserCrypted)
     {
-        $surveyUserId = Crypt::decrypt($surveyUserCrypted);
-        $surveyUser = SurveyUser::findOrFail($surveyUserId);
+
+        $surveyUserId = Crypt::decrypt($surveyUserCrypted); // décrypt the encrypted id generated in createSurveyUser command
+        $surveyUser = SurveyUser::findOrFail($surveyUserId); // if the id decrypted match with the id in DB -> render the survey 
+
         session()->put('surveyUser', $surveyUser);
 
         return view('front.home');
@@ -38,6 +42,7 @@ class SurveyController extends Controller
 
     public function checkEmail(Request $request)
     {   
+        // return an array with the response of the matching, if user email match with the retrieved email => true, else => false
         return ['check' => $this->getSurveyUser()->user->email === $request->email];
     }
 

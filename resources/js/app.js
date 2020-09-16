@@ -26,6 +26,6 @@ const routes = [{
 }];
 
 const app = new Vue({
-    el: '#app',
+    el: '#app', // #app of the app.blade (views)
     router
 });
