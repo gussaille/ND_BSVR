@@ -8,34 +8,28 @@
     <div class='summary'>
         <div class="summary__description">
             <img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="logo">
-            <p class="summary__description__text">Vous trouverez ci-dessous les réponses que vous avez apportées à notre sondage le {{date('d-m-Y à H:i:s', strtotime($surveyUser->updated_at))}} </p>
+            <p class="summary__description__text">Vous trouverez ci-dessous les réponses que vous avez apportées à notre sondage {{date('d-m-Y à H:i:s', strtotime($surveyUser->updated_at))}} </p>
         </div>
-
         <div class="summary__answers">
-            <table class="table table-striped answer-table m-2 mx-auto">
+            @foreach($questions as $question)
+            @foreach($surveyUser->answers as $answer)
+            
+                @if($question->id === $answer->question_id)
+                    <div class="answer">
+                        <p class="answer__number">
+                            Question {{$answer->id}}/20
+                        </p>
+                        <p class="answer__question">
+                            {{$question->label}}
+                        </p>
+                        <div class="answer__user">
+                            <p>{{$answer->response}}</p>
+                        </div>
+                    </div>
+                @endif
 
-                <tbody>
-                  @foreach ($questions as $question)
-                    @foreach ($surveyUser->answers as $answer)
-
-                    @if($question->id === $answer->question_id)
-
-                      <tr>
-                        <th scope="row">{{$answer->question_id}}</th>
-                        <td>{{$question->label}}</td>
-                        <td>{{$answer->response}}</td>
-                        @else
-                      </tr> 
-
-                    @endif
-
-                    @endforeach
-                  @endforeach
-                </tbody>
-
-                <hr>
-
-            </table>
+            @endforeach
+            @endforeach
         </div>
     </div>
 </div>

@@ -375,14 +375,22 @@ q:after {
   color: #1C2541;
 }
 
+.summary-container .summary__answers .answer p {
+  margin-bottom: 5px;
+}
+
 .summary-container .summary__answers .answer__number {
-  font-size: 32px;
+  font-size: 26px;
 }
 
 @media screen and (min-width: 800px) {
   .summary-container .summary__answers .answer__number {
-    font-size: 40px;
+    font-size: 32px;
   }
+}
+
+.summary-container .summary__answers .answer__question {
+  font-size: 20px;
 }
 
 .summary-container .summary__answers .answer__user {
@@ -391,16 +399,6 @@ q:after {
   padding: 16px;
   word-break: break-all;
   border: dotted black;
-}
-
-.summary-container .summary__answers .table {
-  width: 90%;
-}
-
-@media screen and (max-width: 800px) {
-  .summary-container .summary__answers .table {
-    width: 100%;
-  }
 }
 
 /*!

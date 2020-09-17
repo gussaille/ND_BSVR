@@ -37,26 +37,26 @@
                 padding: 20px;
                 border: 2px solid $darkblue;
                 color: $darkblue;
+                p{
+                    margin-bottom: 5px;
+                }
 
                 &__number{
-                    font-size: 32px;
+                    font-size: 26px;
                     @media screen and (min-width: 800px){
-                        font-size: 40px;
+                        font-size: 32px;
                     }
                 }
 
+                &__question{
+                    font-size: 20px;
+                }
                 &__user {
                     box-sizing:border-box;
                     font-size: 20px;
                     padding: 16px;
                     word-break: break-all;
                     border: dotted black;
-                }
-            }
-            .table {
-                width: 90%;
-                @media screen and (max-width: 800px){
-                    width: 100%;
                 }
             }
         }
