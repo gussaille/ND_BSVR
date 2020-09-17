@@ -8,7 +8,7 @@
     <div class='summary'>
         <div class="summary__description">
             <img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="logo">
-            <p class="summary__description__text">Vous trouverez ci-dessous les réponses que vous avez apportées à notre sondage {{date('d-m-Y à H:i:s', strtotime($surveyUser->updated_at))}} </p>
+            <p class="summary__description__text">Vous trouverez ci-dessous les réponses que vous avez apportées à notre sondage le {{date('d/m/Y à H:i', strtotime($surveyUser->updated_at))}}. </p>
         </div>
         <div class="summary__answers">
             @foreach($questions as $question)
