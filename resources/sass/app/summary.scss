@@ -53,6 +53,12 @@
                     border: dotted black;
                 }
             }
+            .table {
+                width: 90%;
+                @media screen and (max-width: 800px){
+                    width: 100%;
+                }
+            }
         }
     }
 }

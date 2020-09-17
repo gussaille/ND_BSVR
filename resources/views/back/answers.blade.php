@@ -14,21 +14,28 @@
 
               @forelse($surveyUsers as $surveyUser)
 
-                <table class="table table-striped answer-table mb-3">
-                  @foreach ($questions as $question)
-
-                  @foreach ($surveyUser->answers as $answer)
+                <table class="table table-striped answer-table m-5">
 
                     <tbody>
-                      <tr>
-                        <th scope="row">{{$answer->question_id}}</th>
-                        <td>{{$question->label}}</td>
-                        <td>{{$answer->response}}</td>
-                      </tr>
+                      @foreach ($questions as $question)
+                        @foreach ($surveyUser->answers as $answer)
+
+                        @if($question->id === $answer->question_id)
+
+                          <tr>
+                            <th scope="row">{{$answer->question_id}}</th>
+                            <td>{{$question->label}}</td>
+                            <td>{{$answer->response}}</td>
+                            @else
+                          </tr> 
+
+                        @endif
+
+                        @endforeach
+                      @endforeach
                     </tbody>
 
-                    @endforeach
-                    @endforeach
+                    <hr>
 
                 </table>
 

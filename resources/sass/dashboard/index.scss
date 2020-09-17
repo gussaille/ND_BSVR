@@ -4,10 +4,16 @@
     margin: 0 auto;
     display: block;
 }
+
 .dashboard-container{
     font-family: Lato;
     display: flex;
     height: 100vh;
+    overflow-x: hidden;
+
+    @media screen and (max-width: 800px){
+        flex-direction: column;
+    }
 }
 
 .panel{
@@ -16,6 +22,11 @@
     height: 100vh;
     background-color: $darkblue;
     flex-grow: 1;
+
+    @media screen and (max-width: 800px){
+        flex-grow: unset;
+        width: 100%;
+    }
 
 
     &__menu {
@@ -40,7 +51,7 @@
     justify-content: space-around;
     min-height: 100vh;
     flex-grow: 5;
-    overflow: auto;
+    overflow-y: auto;
     
     &--survey {
         flex-direction: column;
@@ -91,16 +102,25 @@
             }
         }
     }
+    &__answers{
+        hr{
+            margin: 40px auto;
+        }
+    }
 
     .table {
         width: 90% !important;
         margin: 0 auto;
         max-width: 700px !important;
+
+        @media screen and (max-width: 800px){
+            width: 100% !important;
+        }
+
+        tbody{
+            td{
+                word-break: break-word;
+            }
+        }
     }
-}
-
-
-.answer-table {
-    height: 400px !important;
-    overflow-y: scroll;
 }
