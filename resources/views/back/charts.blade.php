@@ -44,7 +44,7 @@
             "orange",
           ],
           borderWidth: 1,
-          data: [16, 16, 19, 2]
+          data: [ <?php echo json_encode($rift); ?>, <?php echo json_encode($vive); ?>, <?php echo json_encode($mix); ?>, <?php echo json_encode($psvr); ?>]
         }
       ]
     },

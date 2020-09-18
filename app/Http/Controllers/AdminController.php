@@ -30,15 +30,17 @@ class AdminController extends Controller
 
         $answers = Answer::all();
         $answers6 = $answers->where('question_id', 6);
+
         foreach($answers6 as $answer6){
-            // dump($answer6);
+            $psvr = count($answers6->where('response', '=', 'PSVR'));
+            $mix = count($answers6->where('response', '=', 'Windows Mixed Reality'));
+            $vive = count($answers6->where('response', '=', 'HTC Vive'));
+            $rift = count($answers6->where('response', '=', 'Occulus Rift/s'));
         }
-        
-        return view('back.charts', [
-            'choice6' => $choice6, 
-            'choice7' => $choice7, 
-            'choice10' => $choice10 
-        ]);
+     
+        return view('back.charts', compact(
+            'choice6', 'choice7', 'choice10', 'rift', 'mix', 'vive', 'psvr' 
+        ));
     }
 
     public function showQuestions()
