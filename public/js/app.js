@@ -2047,7 +2047,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         question_id: 20
       }],
       errors: {},
-      isSubmit: false
+      clicked: false,
+      isSubmit: false,
+      surveyUserUrl: null
     };
   },
   mounted: function mounted() {
@@ -2057,12 +2059,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   methods: {
     // methods to send an email from server with axios (ajax) and check by server if email is the one
     checkEmail: function checkEmail() {
-      var _this2 = this;
+      var _this = this;
 
       axios.post('/user/email', {
-        'email': this.answers[0].response
+        'email': _this.answers[0].response
       }).then(function (response) {
-        _this2.emailChecked = response.data.check;
+        _this.emailChecked = response.data.check;
       })["catch"](function (err) {
         alert('Une erreur est survenue (' + err.response.status + ')');
       });
@@ -2081,25 +2083,41 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     submit: function submit() {
       var _this = this;
 
-      if (this.emailChecked === true && this.answers[0].response.length >= 1) {
-        axios.post('/answers', {
-          answers: this.answers
-        }).then(function (res) {
-          _this.isSubmit = true;
-        })["catch"](function (err) {
-          var status = err.response.status;
-          var messages = err.response.data.errors;
-          _this.errors = {};
+      if (!_this.clicked) {
+        _this.clicked = true;
 
-          if (_typeof(messages) === 'object') {
-            Object.keys(messages).forEach(function (index) {
-              return _this.errors[index] = messages[index][0];
-            });
-          } else {
-            alert('Une erreur est survenue (' + status + ')');
-          }
-        });
+        if (_this.emailChecked === true && _this.answers[0].response.length >= 1) {
+          axios.post('/answers', {
+            answers: _this.answers
+          }).then(function (res) {
+            _this.isSubmit = true;
+
+            _this.getUrl();
+          })["catch"](function (err) {
+            _this.clicked = false;
+            var status = err.response.status;
+            var messages = err.response.data.errors;
+            _this.errors = {};
+
+            if (_typeof(messages) === 'object') {
+              Object.keys(messages).forEach(function (index) {
+                return _this.errors[index] = messages[index][0];
+              });
+            } else {
+              alert('Une erreur est survenue (' + status + ')');
+            }
+          });
+        }
       }
+    },
+    getUrl: function getUrl() {
+      var _this = this;
+
+      axios.get('/url').then(function (response) {
+        _this.surveyUserUrl = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -6538,7 +6556,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".survey[data-v-52541885] {\n  -webkit-animation-name: fadeIn;\n  animation-name: fadeIn;\n  -webkit-animation-duration: 0.6s;\n  animation-duration: 0.6s;\n  -webkit-animation-delay: 0.8s;\n  animation-delay: 0.8s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-timing-function: ease-in;\n  animation-timing-function: ease-in;\n  width: 100%;\n  opacity: 0;\n  background-color: #0B132B;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885],\n.survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n  margin: 0 auto;\n  width: 300px;\n  display: block;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n    margin: 0;\n}\n}\n.survey__presentation p[data-v-52541885] {\n  margin-bottom: 5px;\n  font-size: 14px;\n  color: white;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation p[data-v-52541885] {\n    font-size: 18px;\n}\n}\n.survey form[data-v-52541885] {\n  padding: 5px 0 20px;\n  box-sizing: border-box;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n  text-transform: uppercase;\n  font-size: 24px;\n}\n.survey .question[data-v-52541885] {\n  color: #1C2541;\n  box-sizing: border-box;\n  padding: 15px;\n  border-radius: 2px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: white;\n  margin: 15px auto 30px;\n}\n@media screen and (min-width: 800px) {\n.survey .question[data-v-52541885] {\n    padding: 15px 30px;\n}\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey .question__answer input[type=email][data-v-52541885] {\n  width: 80%;\n  max-width: 300px;\n}\n@media screen and (max-width: 800px) {\n.survey .question__answer .email-message[data-v-52541885] {\n    display: block;\n}\n}\n.survey .question__answer .email-message.invalid[data-v-52541885] {\n  color: red;\n}\n.survey .question__answer .email-message.valid[data-v-52541885] {\n  color: #169116;\n}\n.survey .question__answer .disabled[data-v-52541885] {\n  pointer-events: none;\n  background-color: lightgrey;\n}\n.survey .question__number[data-v-52541885] {\n  margin-bottom: 0;\n  font-size: 40px;\n}\n.survey .question__label[data-v-52541885] {\n  margin-bottom: 16px;\n  font-size: 26px;\n  line-height: 1.2;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 18px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #0B132B;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n@media screen and (min-width: 800px) {\n.survey__confirmation[data-v-52541885] {\n    font-size: 26px;\n}\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
+exports.push([module.i, ".survey[data-v-52541885] {\n  -webkit-animation-name: fadeIn;\n  animation-name: fadeIn;\n  -webkit-animation-duration: 0.6s;\n  animation-duration: 0.6s;\n  -webkit-animation-delay: 1s;\n  animation-delay: 1s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-timing-function: ease-in;\n  animation-timing-function: ease-in;\n  width: 100%;\n  opacity: 0;\n  background-color: #0B132B;\n  margin: 0 auto;\n}\n.survey__presentation[data-v-52541885],\n.survey form[data-v-52541885] {\n  margin: 0 auto;\n  width: 90%;\n  max-width: 800px;\n}\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n  margin: 0 auto;\n  width: 300px;\n  display: block;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation__logo[data-v-52541885],\n.survey form__logo[data-v-52541885] {\n    margin: 0;\n}\n}\n.survey__presentation p[data-v-52541885] {\n  margin-bottom: 5px;\n  font-size: 14px;\n  color: white;\n}\n@media screen and (min-width: 800px) {\n.survey__presentation p[data-v-52541885] {\n    font-size: 18px;\n}\n}\n.survey form[data-v-52541885] {\n  padding: 5px 0 20px;\n  box-sizing: border-box;\n}\n.survey button[data-v-52541885] {\n  width: 300px;\n  margin: 0 auto;\n  display: block;\n  text-transform: uppercase;\n  font-size: 24px;\n}\n.survey .question[data-v-52541885] {\n  color: #1C2541;\n  box-sizing: border-box;\n  padding: 15px;\n  border-radius: 2px;\n  width: 100%;\n  margin: 0 auto;\n  max-width: 800px;\n  background-color: white;\n  margin: 15px auto 30px;\n}\n@media screen and (min-width: 800px) {\n.survey .question[data-v-52541885] {\n    padding: 15px 30px;\n}\n}\n.survey .question__answer[data-v-52541885] {\n  border: dotted black;\n  box-sizing: border-box;\n  padding: 10px;\n}\n.survey .question__answer textarea[data-v-52541885] {\n  box-sizing: border-box;\n  padding: 5px;\n  max-height: 100px;\n  width: 80%;\n  max-width: 500px;\n}\n.survey .question__answer input[type=email][data-v-52541885] {\n  width: 80%;\n  max-width: 300px;\n}\n@media screen and (max-width: 800px) {\n.survey .question__answer .email-message[data-v-52541885] {\n    display: block;\n}\n}\n.survey .question__answer .email-message.invalid[data-v-52541885] {\n  color: red;\n}\n.survey .question__answer .email-message.valid[data-v-52541885] {\n  color: #169116;\n}\n.survey .question__answer .disabled[data-v-52541885] {\n  pointer-events: none;\n  background-color: lightgrey;\n}\n.survey .question__number[data-v-52541885] {\n  margin-bottom: 0;\n  font-size: 40px;\n}\n.survey .question__label[data-v-52541885] {\n  margin-bottom: 16px;\n  font-size: 26px;\n  line-height: 1.2;\n}\n.survey__confirmation[data-v-52541885] {\n  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;\n  font-size: 18px;\n  width: 90%;\n  max-width: 680px;\n  box-shadow: 1px 2px 10px lightgrey;\n  position: absolute;\n  top: 20%;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: #0B132B;\n  color: white;\n  box-sizing: border-box;\n  padding: 20px;\n}\n@media screen and (min-width: 800px) {\n.survey__confirmation[data-v-52541885] {\n    font-size: 26px;\n}\n}\n.survey__confirmation__logo[data-v-52541885] {\n  width: 300px;\n  margin: 10px auto;\n  display: block;\n}\n.survey .errors[data-v-52541885] {\n  display: block;\n  color: red;\n  margin: 5px 0;\n}", ""]);
 
 // exports
 
@@ -38589,8 +38607,13 @@ var render = function() {
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à\n\t\t\t\tvotre investissement, nous vous préparons une application toujours plus\n\t\t\t\tfacile à utiliser, seul ou en famille.\n\t\t\t\tSi vous désirez consulter vos réponse ultérieurement, vous pouvez consultez\n\t\t\t\tcette adresse: http://xxxxxxxx  "
-            )
+              "Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à\n\t\t\t\tvotre investissement, nous vous préparons une application toujours plus\n\t\t\t\tfacile à utiliser, seul ou en famille.\n\t\t\t\tSi vous désirez consulter vos réponse ultérieurement, vous pouvez consultez\n\t\t\t\tcette adresse: "
+            ),
+            _vm.surveyUserUrl
+              ? _c("a", { attrs: { href: _vm.surveyUserUrl } }, [
+                  _vm._v(_vm._s(_vm.surveyUserUrl) + " ")
+                ])
+              : _vm._e()
           ])
         ])
       : _vm._e()

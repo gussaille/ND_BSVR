@@ -19,7 +19,7 @@
 						<!-- If the email is not valid, others input are disabled and form couldn't be send until the email is valid-->
 						<input v-if="question.id === 1" type='email' placeholder="Veuillez saisir votre adresse email" @change="checkEmail" v-model.lazy="answers[index].response" maxlength="255">
 						
-						<!-- Conditional rendering of error messages of the email field -->
+						<!-- Conditional rendering on error messages of the email field -->
 						<div v-if="question.id === 1" :class="emailChecked !== true ? 'invalid' : 'valid'" class="email-message">
 							<span v-if="emailChecked.length !== 0 && emailChecked === true">Email valide</span>
 							<span v-else-if="emailChecked.length !== 0 && emailChecked !== true">Email inconnu</span>
@@ -61,7 +61,7 @@
 				votre investissement, nous vous préparons une application toujours plus
 				facile à utiliser, seul ou en famille.
 				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-				cette adresse: http://xxxxxxxx  <!-- url dynamique selon l'user --> 
+				cette adresse: <a v-if="surveyUserUrl" :href="surveyUserUrl">{{surveyUserUrl}} </a> <!-- url dynamique selon l'user --> 
 			</p>
 		</div>
     </div>
@@ -159,7 +159,9 @@ export default {
 
 			],
 			errors: {},
+			clicked: false,
 			isSubmit: false,
+			surveyUserUrl: null,
 		}
 	},
 	mounted() {
@@ -170,9 +172,10 @@ export default {
 
 		// methods to send an email from server with axios (ajax) and check by server if email is the one
 		checkEmail(){
-			axios.post('/user/email', {'email': this.answers[0].response})
+			let _this = this;
+			axios.post('/user/email', {'email': _this.answers[0].response})
 			.then(response =>{
-				this.emailChecked = response.data.check;
+				_this.emailChecked = response.data.check;
 			})
 			.catch(err =>{
 				alert('Une erreur est survenue (' + err.response.status + ')');
@@ -192,24 +195,38 @@ export default {
 		// methods submit to send survey form to Database
     	submit() {
 			let _this = this;
-			if(this.emailChecked === true && this.answers[0].response.length >= 1){
-				axios.post('/answers', {answers: this.answers})
-				.then( res => {
-					_this.isSubmit = true;
-				})
-				.catch( err => {
-					let status = err.response.status;
-					let messages = err.response.data.errors;
-					_this.errors = {};
+			if(!_this.clicked) {
+				_this.clicked = true;
+				
+				if(_this.emailChecked === true && _this.answers[0].response.length >= 1){
+					axios.post('/answers', {answers: _this.answers})
+					.then( res => {
+						_this.isSubmit = true;
+						_this.getUrl();
+					})
+					.catch( err => {
+                		_this.clicked = false;
+						let status = err.response.status;
+						let messages = err.response.data.errors;
+						_this.errors = {};
 
-					if (typeof (messages) === 'object') {
-						Object.keys(messages).forEach((index) => _this.errors[index] = messages[index][0]);
-					} else {
-						alert('Une erreur est survenue (' + status + ')');
-					}
-				});
+						if (typeof (messages) === 'object') {
+							Object.keys(messages).forEach((index) => _this.errors[index] = messages[index][0]);
+						} else {
+							alert('Une erreur est survenue (' + status + ')');
+						}
+					});
+				}
 			}
 		},
+		getUrl(){
+			let _this = this;
+			axios.get('/url').then(response =>{
+				_this.surveyUserUrl = response.data;
+			}).catch(error => {
+				console.log(error);
+			});
+		}
     }
 }
 </script>
@@ -222,8 +239,8 @@ export default {
            animation-name: fadeIn;
 		-webkit-animation-duration: 0.6s;
 		        animation-duration: 0.6s;
-		-webkit-animation-delay: 0.8s;
-		        animation-delay: 0.8s;
+		-webkit-animation-delay: 1s;
+		        animation-delay: 1s;
 		-webkit-animation-fill-mode: forwards;
 		        animation-fill-mode: forwards;
 		-webkit-animation-timing-function: ease-in;

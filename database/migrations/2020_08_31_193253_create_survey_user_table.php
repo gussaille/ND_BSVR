@@ -17,6 +17,7 @@ class CreateSurveyUserTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('survey_id')->constrained(); 
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

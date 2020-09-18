@@ -6,6 +6,7 @@ use App\Http\Requests\QuestionStoreRequest;
 use Illuminate\Http\Request;
 use App\SurveyUser;
 use App\Answer;
+use Str;
 use Crypt;
 use App\Survey;
 use App\User;
@@ -26,7 +27,6 @@ class SurveyController extends Controller
 
     public function index($surveyUserCrypted)
     {
-
         $surveyUserId = Crypt::decrypt($surveyUserCrypted); // décrypt the encrypted id generated in createSurveyUser command
         $surveyUser = SurveyUser::findOrFail($surveyUserId); // if the id decrypted match with the id in DB -> render the survey 
 
@@ -49,5 +49,19 @@ class SurveyController extends Controller
     public function storeAnswers(QuestionStoreRequest $request) 
     {
         $this->getSurveyUser()->answers()->createMany($request->answers);
+    }
+
+    public function getSurveyUserUrl()
+    {
+        $surveyUsers = SurveyUser::all();
+        $randomString = Str::random(20);
+
+        foreach($surveyUsers as $surveyUser){
+            $surveyUserUrl = $surveyUser->url = '/recapitulatif/'.$randomString;
+        }
+
+        $surveyUser->save();
+
+        return $surveyUserUrl;
     }
 }

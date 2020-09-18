@@ -213,6 +213,16 @@ q:after {
   }
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.active .page-link {
+  border-color: #1C2541 !important;
+  background-color: #1C2541 !important;
+}
+
 .panel {
   padding-top: 10vh;
   width: 420px;
@@ -315,7 +325,7 @@ q:after {
 
 .information .table {
   width: 90% !important;
-  margin: 0 auto;
+  margin: 30px auto;
   max-width: 700px !important;
 }
 

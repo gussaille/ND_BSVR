@@ -14,7 +14,7 @@
 
               @forelse($surveyUsers as $surveyUser)
 
-                <table class="table table-striped answer-table m-5">
+                <table class="table table-striped answer-table">
 
                     <tbody>
                       @foreach ($questions as $question)
@@ -45,7 +45,8 @@
 
               @endforelse
 
-      </div>
+              {{ $surveyUsers->links() }}
+        </div>
     </div>
 </div>
 

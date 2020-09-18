@@ -49,7 +49,7 @@ class AdminController extends Controller
 
     public function showAnswers()
     {
-        $surveyUsers = SurveyUser::all();
+        $surveyUsers = SurveyUser::where('id', '!=', 0)->paginate(2);
         $questions = Question::all();
 
         return view('back.answers', ['surveyUsers' => $surveyUsers, 'questions' => $questions]); // return all the questions and surveyUsers in the view back.answers
