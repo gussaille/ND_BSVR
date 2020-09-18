@@ -22,7 +22,7 @@ Route::prefix('administration')->middleware(['auth'])->group(function(){
     Route::get('/answers', 'AdminController@showAnswers')->name('admin.answers');
 });
 
-Route::get('/recapitulatif', 'SummaryController@index')->name('show.answers');
+Route::get('/recapitulatif/{url}', 'SummaryController@index')->name('show.answers');
 
 Route::get('/questionnaire/{id}', 'SurveyController@index')->name('surveys.index');
 Route::get('/questions', 'SurveyController@getQuestions');

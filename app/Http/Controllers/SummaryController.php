@@ -13,6 +13,6 @@ class SummaryController extends Controller
        $surveyUser = SurveyUser::all()->first(); 
        $questions = Question::all();
        
-       return view('front.summary', ['surveyUser' => $surveyUser, 'questions'=> $questions]);
+       return view('front.summary', ['surveyUser' => $surveyUser, 'questions' => $questions]);
     }
 }

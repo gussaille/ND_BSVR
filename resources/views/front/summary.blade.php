@@ -17,7 +17,7 @@
                 @if($question->id === $answer->question_id)
                     <div class="answer">
                         <p class="answer__number">
-                            Question {{$answer->id}}/20
+                            Question {{$question->id}}/20
                         </p>
                         <p class="answer__question">
                             {{$question->label}}

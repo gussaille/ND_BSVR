@@ -25,6 +25,8 @@
 							<span v-else-if="emailChecked.length !== 0 && emailChecked !== true">Email inconnu</span>
 						</div>
 
+						<input v-else-if="question.id === 2" :disabled="emailChecked !== true" type='number' placeholder="Âge" v-model="answers[index].response" min="1" max="130">
+
 						<textarea v-else :disabled="emailChecked !== true" placeholder="Veuillez saisir votre réponse" v-model="answers[index].response" maxlength="255"></textarea>
 
 						<small class="errors">{{ errors[`answers.${index}.response`] }}</small>
@@ -61,7 +63,7 @@
 				votre investissement, nous vous préparons une application toujours plus
 				facile à utiliser, seul ou en famille.
 				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-				cette adresse: <a v-if="surveyUserUrl" :href="surveyUserUrl">{{surveyUserUrl}} </a> <!-- url dynamique selon l'user --> 
+				cette adresse: <a v-if="surveyUserUrl" :href="surveyUserUrl">http://localhost:8000{{surveyUserUrl}} </a> <!-- url dynamique selon l'user --> 
 			</p>
 		</div>
     </div>
@@ -359,11 +361,12 @@ export default {
 	        animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;	
 			font-size: 18px;
 			width: 90%;
-			max-width: 680px;
+			max-width: 760px;
 			box-shadow: 1px 2px 10px lightgrey;
 			position: absolute;
 			top: 20%;
 			left: 50%;
+			text-align: center;
 			transform: translateX(-50%);
 			background-color: #0B132B;
 			color: white;

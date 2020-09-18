@@ -372,7 +372,7 @@ q:after {
 
 .summary-container .summary__answers {
   background-color: white;
-  padding: 20px;
+  padding: 40px 20px 20px;
   box-sizing: border-box;
 }
 

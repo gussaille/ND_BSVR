@@ -30,6 +30,14 @@ class SurveyController extends Controller
         $surveyUserId = Crypt::decrypt($surveyUserCrypted); // décrypt the encrypted id generated in createSurveyUser command
         $surveyUser = SurveyUser::findOrFail($surveyUserId); // if the id decrypted match with the id in DB -> render the survey 
 
+        //If User has already submitted his survey
+        $user = User::all();
+        $userRegistered = $user->where('id', '=', $surveyUser->user_id);
+
+        if($userRegistered && $surveyUser->url !== null){
+            abort(404);
+        }
+
         session()->put('surveyUser', $surveyUser);
 
         return view('front.home');
