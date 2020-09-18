@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function showAnswers()
     {
-        $surveyUsers = SurveyUser::where('id', '!=', 0)->paginate(2);
+        $surveyUsers = SurveyUser::where('id', '!=', 0)->orderBy('updated_at', 'desc')->paginate(2);
         $questions = Question::all();
 
         return view('back.answers', ['surveyUsers' => $surveyUsers, 'questions' => $questions]); // return all the questions and surveyUsers in the view back.answers
