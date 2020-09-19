@@ -37,15 +37,53 @@ class AdminController extends Controller
             $vive = count($answers6->where('response', '=', 'HTC Vive'));
             $rift = count($answers6->where('response', '=', 'Occulus Rift/s'));
         }
-     
+
+        $answers7 = $answers->where('question_id', 7);
+
+        foreach($answers7 as $answer7){
+            $steam = count($answers7->where('response', '=', 'SteamVR'));
+            $occulus = count($answers7->where('response', '=', 'Occulus store'));
+            $viveport = count($answers7->where('response', '=', 'Viveport'));
+            $play = count($answers7->where('response', '=', 'Playstation VR'));
+            $google = count($answers7->where('response', '=', 'GooglePlay'));
+            $windows = count($answers7->where('response', '=', 'Windows store'));
+        }
+
+        $answers10 = $answers->where('question_id', 10);
+
+        foreach($answers10 as $answer10){
+            $direct = count($answers10->where('response', '=', 'regarder des émissions TV en direct'));
+            $film = count($answers10->where('response', '=', 'regarder des films'));
+            $solo = count($answers10->where('response', '=', 'jouer en solo'));
+            $team = count($answers10->where('response', '=', 'jouer en team'));
+        }
+
+        $ratingAnswers = $answers->whereBetween('question_id', [11, 15]);
+
+        foreach($ratingAnswers as $ratingAnswer){
+            $images = $ratingAnswers->where('question_id', '=', 11);
+            $confort = $ratingAnswers->where('question_id', '=', 12);
+            $network = $ratingAnswers->where('question_id', '=', 13);
+            $graphisme = $ratingAnswers->where('question_id', '=', 14);
+            $audio = $ratingAnswers->where('question_id', '=', 15);
+        }
+        
+        foreach($images as $image){
+            dump(count($image->response));
+        }
+
         return view('back.charts', compact(
-            'choice6', 'choice7', 'choice10', 'rift', 'mix', 'vive', 'psvr' 
+            'choice6', 'choice7', 'choice10', 
+            'rift', 'mix', 'vive', 'psvr', 
+            'steam', 'occulus', 'viveport', 'play', 'google', 'windows',
+            'direct', 'film', 'solo', 'team'
         ));
     }
 
     public function showQuestions()
     {
         $questions = Question::all();
+
         return view("back.survey", ['questions'=> $questions]); // return all the questions of the survey in the view back.survey
     }
 

@@ -261,6 +261,12 @@ q:after {
   overflow-y: auto;
 }
 
+@media screen and (max-width: 800px) {
+  .information {
+    overflow-y: unset;
+  }
+}
+
 .information--survey {
   flex-direction: column;
   display: block;

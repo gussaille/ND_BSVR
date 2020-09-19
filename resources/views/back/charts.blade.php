@@ -29,8 +29,8 @@
 
   <script>
 
-    var ctx = document.querySelector('#canvas1').getContext('2d');
-    var firstChart = new Chart(ctx, {
+    let ctx = document.querySelector('#canvas1').getContext('2d');
+    let firstChart = new Chart(ctx, {
     type: 'pie',
     data: {
       labels: <?php echo json_encode($choice6); ?>,
@@ -57,21 +57,21 @@
       }
     });
 
-    var ctx2 = document.querySelector("#canvas2").getContext('2d');
-    var secondChart = new Chart(ctx2, {
+    let ctx2 = document.querySelector("#canvas2").getContext('2d');
+    let secondChart = new Chart(ctx2, {
       type: 'pie',
       data: {
         labels: <?php echo json_encode($choice7); ?>,
         datasets: [{
           backgroundColor: [
-            "#CC0000",
+            "blue",
             "green",
             "pink",
             "orange",
-            "purple",
-            "lemon"
+            "red",
+            "lightgreen"
           ],
-          data: [17, 20, 38, 2, 26, 12]
+          data: [{{$steam}}, {{$occulus}}, {{$viveport}}, {{$play}}, {{$google}}, {{$windows}} ]
         }]
       },
       options: {
@@ -83,11 +83,11 @@
       }
     });
 
-    var ctx3 = document.querySelector("#canvas3").getContext('2d');
-    var thirdChart = new Chart(ctx3, {
+    let ctx3 = document.querySelector("#canvas3").getContext('2d');
+    let thirdChart = new Chart(ctx3, {
       type: 'pie',
       data: {
-        labels:<?php echo json_encode($choice10); ?>,
+        labels: <?php echo json_encode($choice10); ?>,
         datasets: [{
           backgroundColor: [
             "yellow",
@@ -95,7 +95,7 @@
             "lightgreen",
             "black",
           ],
-          data: [53, 12, 37, 2]
+          data: [{{ $direct }}, {{ $film }}, {{ $solo }}, {{ $team }}]
         }]
       },
       options: {
@@ -107,20 +107,20 @@
       }
     });
 
-    var ctx4 = document.querySelector("#canvas4").getContext('2d');
-    var fourthChart = new Chart(ctx4, {
+    let ctx4 = document.querySelector("#canvas4").getContext('2d');
+    let fourthChart = new Chart(ctx4, {
       type: 'radar',
       data: {
         labels: ["Image", "Confort", "Réseau", "Graphisme", "Audio"],
         datasets: [{
-          backgroundColor: [
-            "red",
-            "blue",
-            'green',
-            'black',
-            'purple'
-          ],
-          data: [5, 3, 4, 4, 5]
+              label: "Statistiques",
+              backgroundColor: "rgba(179,181,198,0.2)",
+              borderColor: "rgba(179,181,198,1)",
+              pointBackgroundColor: "rgba(179,181,198,1)",
+              pointBorderColor: "#fff",
+              pointHoverBackgroundColor: "#fff",
+              pointHoverBorderColor: "rgba(179,181,198,1)",
+              data: [5, 4, 3, 4, 5]
         }]
       },
       options: {
