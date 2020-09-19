@@ -9,12 +9,12 @@
   <div class="information">
 
       <div class="information__chart">
-
-        <canvas id="canvas1"></canvas>
-        <canvas id="canvas2"></canvas> 
-        <canvas id="canvas3"></canvas> 
-        <canvas id="canvas4"></canvas>
-
+          
+          <canvas id="canvas1"></canvas>
+          <canvas id="canvas2"></canvas> 
+          <canvas id="canvas3"></canvas> 
+          <canvas id="canvas4"></canvas>
+      
       </div>
 
   </div>
@@ -44,7 +44,7 @@
             "orange",
           ],
           borderWidth: 1,
-          data: [ <?php echo json_encode($rift); ?>, <?php echo json_encode($vive); ?>, <?php echo json_encode($mix); ?>, <?php echo json_encode($psvr); ?>]
+          data: [ {{$rift}}, {{$vive}}, {{$mix}}, {{$psvr}}]
         }
       ]
     },
@@ -120,7 +120,7 @@
               pointBorderColor: "#fff",
               pointHoverBackgroundColor: "#fff",
               pointHoverBorderColor: "rgba(179,181,198,1)",
-              data: [5, 4, 3, 4, 5]
+              data: [{{$ratingImage}}, {{$ratingConfort}}, {{$ratingNetwork}}, {{$ratingGraphisme}}, {{$ratingAudio}}]
         }]
       },
       options: {
@@ -128,7 +128,11 @@
             display: true,
             fontSize: 16,
             text: 'Notes des clients'
-        }
+        },
+        scale: {
+            min: 0,
+            max: 5,
+        },
       }
     });
     
