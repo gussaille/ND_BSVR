@@ -9,12 +9,13 @@ use App\SurveyUser;
 use App\Answer;
 
 class AdminController extends Controller
-{
+{        
     public function index()
     {
         $answers = Answer::all();
 
         if(count($answers) !== 0){
+            // Prepare and send data to the charts plugin if $answers is not empty
 
             $question6 = Question::all()->where('id', 6);
             $question7 = Question::all()->where('id', 7);
@@ -31,7 +32,7 @@ class AdminController extends Controller
             foreach($question10 as $choice){
                 $choice10 = $choice->options;
             }
-
+            // Stats for the answers of the question 6
             $answers6 = $answers->where('question_id', 6);
             foreach($answers6 as $answer6){
                 $psvr = count($answers6->where('response', '=', 'PSVR'));
@@ -40,6 +41,7 @@ class AdminController extends Controller
                 $rift = count($answers6->where('response', '=', 'Occulus Rift/s'));
             }
 
+            // Stats for the answers of the question 7
             $answers7 = $answers->where('question_id', 7);
             foreach($answers7 as $answer7){
                 $steam = count($answers7->where('response', '=', 'SteamVR'));
@@ -50,6 +52,7 @@ class AdminController extends Controller
                 $windows = count($answers7->where('response', '=', 'Windows store'));
             }
 
+            // Stats for the answers of the question 10
             $answers10 = $answers->where('question_id', 10);
             foreach($answers10 as $answer10){
                 $direct = count($answers10->where('response', '=', 'regarder des émissions TV en direct'));
@@ -58,6 +61,7 @@ class AdminController extends Controller
                 $team = count($answers10->where('response', '=', 'jouer en team'));
             }
 
+            // Stats for the answers of the questions from 11 to 15
             $ratingAnswers = $answers->whereBetween('question_id', [11, 15]);
             foreach($ratingAnswers as $ratingAnswer){
                 $images = $ratingAnswers->where('question_id', '=', 11);
@@ -67,6 +71,7 @@ class AdminController extends Controller
                 $audio = $ratingAnswers->where('question_id', '=', 15);
             } 
 
+            // Calculate the average of the users answers from question 11 to 15
             $ratingImage = $images->sum('response') / $images->count();
             $ratingConfort = $confort->sum('response') / $confort->count();
             $ratingNetwork = $network->sum('response') / $network->count();

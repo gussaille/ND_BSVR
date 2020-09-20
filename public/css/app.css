@@ -359,6 +359,7 @@ q:after {
 }
 
 .summary-container .summary__description {
+  padding-top: 20px;
   width: 80%;
   margin: 0 auto;
 }

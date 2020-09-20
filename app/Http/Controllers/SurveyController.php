@@ -17,7 +17,8 @@ class SurveyController extends Controller
     protected function getSurveyUser(): SurveyUser
     {
         $surveyUser = session()->get('surveyUser');
-
+        
+        //if there is no surveyUser detected it return an error page
         if(!$surveyUser || !($surveyUser instanceof SurveyUser)){
             abort(404);
         }
@@ -28,13 +29,13 @@ class SurveyController extends Controller
     public function index($surveyUserCrypted)
     {
         $surveyUserId = Crypt::decrypt($surveyUserCrypted); // decrypt the encrypted id generated in createSurveyUser command
+
         $surveyUser = SurveyUser::findOrFail($surveyUserId); // if the id decrypted match with the id in DB -> render the survey 
 
-        //If User has already submitted his survey, the form is not already available
         $user = User::all();
         $userRegistered = $user->where('id', '=', $surveyUser->user_id);
 
-        //if User refresh on the confirmation after submitted his survey, he will be redirect to his summary answers
+        //if User refresh or again on the generated link after submitted his survey, he will be redirect to his summary answers
         if($userRegistered && $surveyUser->url !== null){
             return redirect('recapitulatif/'.$surveyUser->url);
         }
@@ -51,7 +52,7 @@ class SurveyController extends Controller
 
     public function checkEmail(Request $request)
     {   
-        // return an array with the response of the matching, if user email match with the retrieved email => true, else => false
+        // return an array with the response of the matching, if user email match with the retrieved email it return true, else return false
         return ['check' => $this->getSurveyUser()->user->email === $request->email];
     }
 
@@ -62,6 +63,7 @@ class SurveyController extends Controller
 
     public function getSurveyUserUrl()
     {
+        //generate random string to avoid some Users to take a look at the others user's answers
         $surveyUsers = SurveyUser::all();
         $randomString = Str::random(20);
 

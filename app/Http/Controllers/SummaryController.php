@@ -10,12 +10,14 @@ class SummaryController extends Controller
 {
     public function index($surveyUserUrl)
     {
-        $surveyUsers = SurveyUser::all(); 
+        $surveyUsers = SurveyUser::all()->where('url', '=', $surveyUserUrl); 
+
         foreach($surveyUsers as $surveyUser){
-            $surveyUser->where('url', '=', $surveyUserUrl);
+            $surveyUser->where('user_id', '=', $surveyUser->user->id);
         }
+        
         $questions = Question::all();
-       
+
         return view('front.summary', ['surveyUser' => $surveyUser, 'questions' => $questions]);
     }
 }

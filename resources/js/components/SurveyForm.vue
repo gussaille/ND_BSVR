@@ -272,6 +272,8 @@ export default {
 		}
 
 		&__presentation {
+			padding-top: 20px;
+
 			p{
 				margin-bottom: 5px;
 				font-size: 14px;

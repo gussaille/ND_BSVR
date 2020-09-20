@@ -43,29 +43,32 @@ class CreateSurveyUser extends Command
      */
     public function handle()
     {
+        // Creating an header array with two labels
         $headers = ['Id', 'Email'];
-
+        // Creating an array with all users in DB according to their id and email
         $users = User::all(['id', 'email'])->toArray();
-
+        //add to table
         $this->table($headers, $users);
+        //Generate a question to ask which user id you want to choose
+        $userId = $this->ask('Quel id utilisateur ?');
 
+        // Creating an header array with two labels
         $headers = ['Id', 'Name'];
-
-        $userId = $this->ask('Quel utilisateur ?');
-
-
+        // Creating an array with all survey (there is only one survey here) in DB according to their id and name
         $surveys = Survey::all(['id', 'name'])->toArray();
-
+        //add to table
         $this->table($headers, $surveys);
-
+        //Generate a question to ask which survey you want to choose
         $surveyId = $this->ask('Quel questionnaire ?');
 
+        // Confirmation message to ask if we want to link the user with the survey in the surveyUser table
         if($this->confirm("Voulez-vous attacher l'utilisateur numero " . $userId . " au questionnaire numero " . $surveyId . "?")){
+            // Generate a new row of surveyUser in table
             $surveyUser = SurveyUser::create([
                 "user_id" => $userId,
                 "survey_id" => $surveyId
             ]);
-
+            //Generate a link with en encrypted id which will be decrypted into the SurveyController
             $this->info('URL: '.route('surveys.index',['id'=> Crypt::encrypt($surveyUser->id)]));
         }
     }
