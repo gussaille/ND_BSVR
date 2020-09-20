@@ -174,7 +174,7 @@ export default {
 	},
 	methods: {
 
-		// methods to send an email from server with axios (ajax) and check by server if email is the one
+		// methods to send an email to server with axios (promise ajax), check by server if email is the good one and return a response
 		checkEmail(){
 			let _this = this;
 			axios.post('/user/email', {'email': _this.answers[0].response})

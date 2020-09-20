@@ -2061,7 +2061,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.getQuestions();
   },
   methods: {
-    // methods to send an email from server with axios (ajax) and check by server if email is the one
+    // methods to send an email to server with axios (promise ajax), check by server if email is the good one and return a response
     checkEmail: function checkEmail() {
       var _this = this;
 

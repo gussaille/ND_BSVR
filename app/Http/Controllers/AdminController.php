@@ -87,6 +87,7 @@ class AdminController extends Controller
                 'ratingImage', 'ratingConfort', 'ratingNetwork', 'ratingGraphisme', 'ratingAudio'
             ));
         } else{
+            
             return view('back.charts');
         }
     }

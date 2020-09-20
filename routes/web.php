@@ -26,6 +26,8 @@ Route::get('/recapitulatif/{url}', 'SummaryController@index')->name('show.answer
 
 Route::get('/questionnaire/{id}', 'SurveyController@index')->name('surveys.index');
 Route::get('/questions', 'SurveyController@getQuestions');
+
 Route::post('/user/email', 'SurveyController@checkEmail');
+
 Route::post('/answers', 'SurveyController@storeAnswers')->name('store.answers');
 Route::get('/url', 'SurveyController@getSurveyUserUrl')->name('surveys.getUrl');
