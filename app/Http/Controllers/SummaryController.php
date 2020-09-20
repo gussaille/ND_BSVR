@@ -8,11 +8,14 @@ use App\Question;
 
 class SummaryController extends Controller
 {
-    public function index()
+    public function index($surveyUserUrl)
     {
-       $surveyUser = SurveyUser::all()->first(); 
-       $questions = Question::all();
+        $surveyUsers = SurveyUser::all(); 
+        foreach($surveyUsers as $surveyUser){
+            $surveyUser->where('url', '=', $surveyUserUrl);
+        }
+        $questions = Question::all();
        
-       return view('front.summary', ['surveyUser' => $surveyUser, 'questions' => $questions]);
+        return view('front.summary', ['surveyUser' => $surveyUser, 'questions' => $questions]);
     }
 }

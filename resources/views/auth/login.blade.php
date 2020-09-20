@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card bg-dark text-light p-4" >
 
-                <img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="mt-2 d-block mx-auto logo"/>
+                <img src="/img/bigscreen_logo.png" alt="Logo Bigscreen" class="mt-2 d-block mx-auto logo"/>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

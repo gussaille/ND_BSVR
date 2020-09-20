@@ -9,11 +9,17 @@
   <div class="information">
 
       <div class="information__chart">
+        
+        @isset($answers)
           
           <canvas id="canvas1"></canvas>
           <canvas id="canvas2"></canvas> 
           <canvas id="canvas3"></canvas> 
           <canvas id="canvas4"></canvas>
+        
+        @else
+        <p>Il n'y a pas de réponses pour le moment.</p>
+        @endisset
       
       </div>
 
@@ -23,6 +29,7 @@
 
 @endsection
 
+@isset($answers)
 @section('js')
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -102,7 +109,7 @@
         title: {
             display: true,
             fontSize: 16,
-            text: 'Les pratiques sur BigScreen'
+            text: 'Les pratiques sur Bigscreen'
         }
       }
     });
@@ -139,5 +146,5 @@
 </script>
 
 @endsection
-
+@endif
 

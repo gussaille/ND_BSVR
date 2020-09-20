@@ -41,7 +41,7 @@
 
               @empty
 
-                <p class="text-center">Il n'y pas de réponses pour le moment.</p>
+                <p class="text-center">Il n'y a pas de réponses pour le moment.</p>
 
               @endforelse
 

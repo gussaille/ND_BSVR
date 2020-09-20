@@ -1,7 +1,7 @@
 <template>
     <div class="survey">
 		<div class="survey__presentation" v-if="!isSubmit">
-			<img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="survey__presentation__logo">
+			<img src="/img/bigscreen_logo.png" alt="Logo Bigscreen" class="survey__presentation__logo">
 			<p>Merci de répondre à toutes les questions et de valider le formulaire en bas de page.</p>
 		</div>
 		
@@ -57,13 +57,15 @@
 
 		<!-- Confirmations message appear if survey has been successfuly sent -->
 		<div class="survey__confirmation" v-if="isSubmit">
-			<img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="survey__confirmation__logo">
+			<img src="/img/bigscreen_logo.png" alt="Logo Bigscreen" class="survey__confirmation__logo">
 
 			<p>Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
 				votre investissement, nous vous préparons une application toujours plus
 				facile à utiliser, seul ou en famille.
-				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-				cette adresse: <a v-if="surveyUserUrl" :href="surveyUserUrl">http://localhost:8000{{surveyUserUrl}} </a> <!-- url dynamique selon l'user --> 
+				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consulter
+				cette adresse: <a v-if="surveyUserUrl" :href="`http://localhost:8000/recapitulatif/${surveyUserUrl}`">
+				http://localhost:8000/recapitulatif/{{surveyUserUrl}} 
+				</a> <!-- url dynamique selon l'user --> 
 			</p>
 		</div>
     </div>
@@ -72,7 +74,7 @@
 <script>
 
 export default {
-	name: 'Survey',
+	name: 'SurveyForm',
 	data() {
 		return {
 			emailChecked: [],
@@ -194,7 +196,7 @@ export default {
 			})
 		},
 
-		// methods submit to send survey form to Database
+		// methods submit to send survey to Database
     	submit() {
 			let _this = this;
 			if(!_this.clicked) {
@@ -249,7 +251,7 @@ export default {
 		        animation-timing-function: ease-in;
 		width: 100%;
 		opacity: 0;
-		background-color: #0B132B;
+		background-color: #1C2541;
 		margin: 0 auto;
 		
 		&__presentation, 

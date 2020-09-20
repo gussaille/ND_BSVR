@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <survey></survey>
+    <survey-form></survey-form>
 
 @endsection
 

@@ -33,7 +33,6 @@ class AdminController extends Controller
             }
 
             $answers6 = $answers->where('question_id', 6);
-
             foreach($answers6 as $answer6){
                 $psvr = count($answers6->where('response', '=', 'PSVR'));
                 $mix = count($answers6->where('response', '=', 'Windows Mixed Reality'));
@@ -42,7 +41,6 @@ class AdminController extends Controller
             }
 
             $answers7 = $answers->where('question_id', 7);
-
             foreach($answers7 as $answer7){
                 $steam = count($answers7->where('response', '=', 'SteamVR'));
                 $occulus = count($answers7->where('response', '=', 'Occulus store'));
@@ -53,7 +51,6 @@ class AdminController extends Controller
             }
 
             $answers10 = $answers->where('question_id', 10);
-
             foreach($answers10 as $answer10){
                 $direct = count($answers10->where('response', '=', 'regarder des émissions TV en direct'));
                 $film = count($answers10->where('response', '=', 'regarder des films'));
@@ -62,7 +59,6 @@ class AdminController extends Controller
             }
 
             $ratingAnswers = $answers->whereBetween('question_id', [11, 15]);
-
             foreach($ratingAnswers as $ratingAnswer){
                 $images = $ratingAnswers->where('question_id', '=', 11);
                 $confort = $ratingAnswers->where('question_id', '=', 12);
@@ -78,14 +74,16 @@ class AdminController extends Controller
             $ratingAudio = $audio->sum('response') / $audio->count();
         
             return view('back.charts', compact(
+                'answers',
                 'choice6', 'choice7', 'choice10', 
                 'rift', 'mix', 'vive', 'psvr', 
                 'steam', 'occulus', 'viveport', 'play', 'google', 'windows',
                 'direct', 'film', 'solo', 'team',
                 'ratingImage', 'ratingConfort', 'ratingNetwork', 'ratingGraphisme', 'ratingAudio'
             ));
+        } else{
+            return view('back.charts');
         }
-        return view('back.charts');
     }
 
     public function showQuestions()

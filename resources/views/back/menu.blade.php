@@ -1,6 +1,6 @@
 <aside class="panel">
 
-    <img src="/img/bigscreen_logo.png" alt="Logo BigScreen" class="logo">
+    <img src="/img/bigscreen_logo.png" alt="Logo Bigscreen" class="logo">
 
     <nav class="panel__menu">
       <ul class="p-4 text-center text-dark text-bold">

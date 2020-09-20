@@ -27,15 +27,16 @@ class SurveyController extends Controller
 
     public function index($surveyUserCrypted)
     {
-        $surveyUserId = Crypt::decrypt($surveyUserCrypted); // décrypt the encrypted id generated in createSurveyUser command
+        $surveyUserId = Crypt::decrypt($surveyUserCrypted); // decrypt the encrypted id generated in createSurveyUser command
         $surveyUser = SurveyUser::findOrFail($surveyUserId); // if the id decrypted match with the id in DB -> render the survey 
 
-        //If User has already submitted his survey
+        //If User has already submitted his survey, the form is not already available
         $user = User::all();
         $userRegistered = $user->where('id', '=', $surveyUser->user_id);
 
+        //if User refresh on the confirmation after submitted his survey, he will be redirect to his summary answers
         if($userRegistered && $surveyUser->url !== null){
-            abort(404);
+            return redirect('recapitulatif/'.$surveyUser->url);
         }
 
         session()->put('surveyUser', $surveyUser);
@@ -65,7 +66,7 @@ class SurveyController extends Controller
         $randomString = Str::random(20);
 
         foreach($surveyUsers as $surveyUser){
-            $surveyUserUrl = $surveyUser->url = '/recapitulatif/'.$randomString;
+            $surveyUserUrl = $surveyUser->url = $randomString;
         }
 
         $surveyUser->save();

@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Répondez au questionnaire BigScreen pour nous aider à améliorer notre application">
+    <meta name="description" content="Répondez au questionnaire Bigscreen pour nous aider à améliorer notre application">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>BigScreen Sondage</title>
+    <title>Bigscreen Sondage</title>
     <link rel="icon" type="image/png" href="/img/favicon.png" />
 
     <!-- Fonts -->
