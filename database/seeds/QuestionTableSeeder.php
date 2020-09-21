@@ -124,14 +124,14 @@ class QuestionTableSeeder extends Seeder
 
             [
                 'label' => 'Aimeriez-vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?',
-                'type' => 'C',
-                'options'=> null
+                'type' => 'A',
+                'options'=> ['oui', 'non']
             ],
 
             [
                 'label' => 'Aimeriez vous jouer à des jeux exclusifs sur votre Bigscreen ?', 
-                'type' => 'C',
-                'options'=> null
+                'type' => 'A',
+                'options'=> ['oui', 'non']
             ],
 
             [
