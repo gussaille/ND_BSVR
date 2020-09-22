@@ -32,7 +32,7 @@
 @isset($answers)
 @section('js')
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.0"> </script>  
 
   <script>
 
@@ -120,10 +120,10 @@
       data: {
         labels: ["Image", "Confort", "Réseau", "Graphisme", "Audio"],
         datasets: [{
-              label: "Statistiques",
+              label: "Note",
               backgroundColor: "rgba(179,181,198,0.2)",
-              borderColor: "rgba(179,181,198,1)",
-              pointBackgroundColor: "rgba(179,181,198,1)",
+              borderColor: "rgba(189, 23, 28,1)",
+              pointBackgroundColor: "rgba(48, 44, 44,1)",
               pointBorderColor: "#fff",
               pointHoverBackgroundColor: "#fff",
               pointHoverBorderColor: "rgba(179,181,198,1)",
