@@ -57,22 +57,6 @@ class LoginController extends Controller
         return Redirect::to("auth.login")->withSuccess('Veuillez saisir un identifiant et un mot de passe correct');
     }
 
-
-    // public function toDashboard()
-    // {
-    //     return view('back.index');
-    // }
-
-
-    // public function dashboard()
-    // {
- 
-    //   if(Auth::check()){
-    //     return view('dashboard');
-    //   }
-    //    return Redirect::to("auth.login")->withSuccess("Vous n'avez pas accès à cette page.");
-    // }
-
     public function logout() 
     {
         Session::flush();

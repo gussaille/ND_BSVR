@@ -52,7 +52,7 @@
 
 			<small class="errors" v-if="errors.answers">{{ errors.answers }}</small>
 
-			<button type="submit" class="btn btn-primary">Finaliser</button>
+			<button type="submit" class="btn">Finaliser</button>
 		</form>
 
 		<!-- Confirmations message appear if survey has been successfuly sent -->
@@ -264,6 +264,17 @@ export default {
 				margin: 0 auto;
 				width: 300px;
 				display: block;
+				-webkit-animation-name: scale;
+           		animation-name: scale;
+				-webkit-animation-duration: 0.6s;
+						animation-duration: 0.6s;
+				-webkit-animation-delay: 1.2s;
+						animation-delay: 1.2s;
+				-webkit-animation-fill-mode: forwards;
+						animation-fill-mode: forwards;
+				-webkit-animation-timing-function: ease-in;
+						animation-timing-function: ease-in;
+				opacity:0;
 
 				@media screen and (min-width: 800px){
 					margin: 0;
@@ -294,8 +305,19 @@ export default {
 			width: 300px;
 			margin: 0 auto;;
 			display: block;
+			background-color: white;
+			color:#1C2541;
+			border: 2px solid #1C2541;
 			text-transform: uppercase;
 			font-size: 24px;
+			transition: 0.6s ease;
+			
+			&:hover {
+				transition: 0.6s ease;
+				background-color: #1C2541;
+				color: white;
+				border: 2px solid white;
+			}
 		}
 
 		
@@ -303,7 +325,7 @@ export default {
 			color:  #1C2541;
 			box-sizing: border-box;
 			padding: 15px;
-			border-radius: 2px;
+			border-radius: 4px;
 			width: 100%;
 			margin: 0 auto;
 			max-width: 800px;
@@ -315,7 +337,7 @@ export default {
 			}
 
 			&__answer {
-				
+				border-radius: 4px;
 				border: dotted black;
 				box-sizing: border-box;
 				padding: 10px;
@@ -385,6 +407,9 @@ export default {
 				width: 300px;
 				margin: 10px auto;
 				display: block;
+			}
+			a{
+				word-break: break-word;
 			}
 		}
 

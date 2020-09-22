@@ -137,8 +137,11 @@
             text: 'Notes des clients'
         },
         scale: {
-            min: 0,
+            ticks: {
+            beginAtZero: true,
             max: 5,
+            min: 0
+          }
         },
       }
     });
@@ -146,5 +149,5 @@
 </script>
 
 @endsection
-@endif
+@endisset
 
