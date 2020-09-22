@@ -300,7 +300,6 @@ q:after {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-around;
   min-height: 100vh;
   flex-grow: 5;
