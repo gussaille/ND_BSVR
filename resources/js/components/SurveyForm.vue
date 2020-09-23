@@ -63,7 +63,7 @@
 				votre investissement, nous vous préparons une application toujours plus
 				facile à utiliser, seul ou en famille.
 				Si vous désirez consulter vos réponse ultérieurement, vous pouvez consulter
-				cette adresse: <a v-if="surveyUserUrl" :href="`http://localhost:8000/recapitulatif/${surveyUserUrl}`">
+				cette adresse: <a v-if="surveyUserUrl" :href="`/recapitulatif/${surveyUserUrl}`">
 				http://localhost:8000/recapitulatif/{{surveyUserUrl}} 
 				</a> <!-- url dynamique selon l'user --> 
 			</p>
@@ -394,7 +394,7 @@ export default {
 			left: 50%;
 			text-align: center;
 			transform: translateX(-50%);
-			background-color: #0B132B;
+			background-color:#1C2541;
 			color: white;
 			box-sizing: border-box;
 			padding: 20px;
